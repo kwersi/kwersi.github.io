@@ -1,0 +1,145 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My First Website</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        /* Cat in bottom-left corner */
+    .corner-cat {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 150px;
+            height: auto;
+            z-index: 1000;
+            pointer-events: none;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #111827;
+            color: white;
+
+            <img
+            src="https://i.pinimg.com/originals/34/08/d7/3408d7949bfb3dc695c7d3a80a02e616.gif?nii=t"
+            class="corner-cat"
+            alt="Corner cat"
+        />
+        }
+
+        /* Navigation */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 25px 10%;
+            background-color: #1f2937;
+        }
+
+        nav h2 {
+            color: #60a5fa;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin-left: 20px;
+        }
+
+        nav a:hover {
+            color: #60a5fa;
+        }
+
+        /* Main section */
+        .hero {
+            min-height: 80vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .hero h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+        }
+
+        .hero p {
+            font-size: 18px;
+            color: #9ca3af;
+            margin-bottom: 30px;
+        }
+
+        button {
+            padding: 14px 30px;
+            border: none;
+            border-radius: 8px;
+            background-color: #3b82f6;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        button:hover {
+            background-color: #2563eb;
+            transform: scale(1.05);
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 25px;
+            background-color: #1f2937;
+            color: #9ca3af;
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav>
+        <h2>My Website</h2>
+
+        <div>
+            <a href="#home">Home</a>
+            <a href="#about">About</a>
+            <a href="#contact">Contact</a>
+        </div>
+    </nav>
+
+    <section class="hero" id="home">
+        <h1>Welcome to My Website!</h1>
+
+        <p>This is my first website hosted on GitHub.</p>
+
+        <button onclick="showMessage()">
+            Click Me
+        </button>
+
+        <p id="message" style="margin-top: 25px;"></p>
+    </section>
+
+    <footer>
+        <p>© 2026 My Website. All rights reserved.</p>
+    </footer>
+
+    <script>
+        function showMessage() {
+            document.getElementById("message").textContent =
+                "Congratulations! Your website is working!";
+        }
+    </script>
+
+</body>
+</html>
