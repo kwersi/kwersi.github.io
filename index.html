@@ -375,11 +375,7 @@ h1 {
     <!-- Profile -->
 
     <div class="profile">
-        <img
-            src="dust.gif"
-            alt="kwersi"
-            class="avatar">
-
+        <img src="dust.gif" alt="kwersi" class="avatar">
         <h1>kwersi</h1>
         <div class="username">@kwersi</div>
     </div>
@@ -393,7 +389,6 @@ h1 {
             href="https://x.com/kwersi"
             target="_blank"
             rel="noopener noreferrer">
-
             <img src="icons/x.svg" alt="X" class="icon">
             <div class="link-title">twitter</div>
         </a>
@@ -403,7 +398,6 @@ h1 {
             href="https://steamcommunity.com/profiles/76561198354031646"
             target="_blank"
             rel="noopener noreferrer">
-
             <img src="icons/steam.svg" alt="Steam" class="icon">
             <div class="link-title">steam</div>
         </a>
@@ -413,7 +407,6 @@ h1 {
             href="https://www.faceit.com/en/players/kwersi"
             target="_blank"
             rel="noopener noreferrer">
-
             <img src="icons/faceit.svg" alt="Faceit" class="icon">
             <div class="link-title">faceit</div>
         </a>
@@ -424,7 +417,6 @@ h1 {
             tabindex="0"
             onclick="copyDiscord()"
             onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();copyDiscord();}">
-
             <img src="icons/discord.svg" alt="Discord" class="icon">
             <div class="link-title">discord • @kwersi</div>
         </div>
@@ -501,7 +493,8 @@ h1 {
             </button>
         </div>
 
-        <!-- Add Leetify's official attribution logo here -->
+        <!-- Leetify Attribution -->
+
         <a
             class="leetify-credit"
             href="https://leetify.com/"
@@ -524,7 +517,6 @@ h1 {
     download
     class="settings-btn"
     title="Download CS2 Settings">
-
     <img src="icons/cog.svg" alt="Settings">
     <span>Download CFG</span>
 </a>
@@ -547,7 +539,6 @@ function copyDiscord() {
             const toast = document.getElementById("toast");
 
             toast.classList.add("show");
-
             clearTimeout(toastTimeout);
 
             toastTimeout = setTimeout(() => {
@@ -651,8 +642,9 @@ async function loadLeetifyStats() {
         const rating = data.rating || {};
         const ranks = data.ranks || {};
 
-        // Leetify skill ratings
+        // FIXED: Leetify Rating is stored in ranks.leetify
         const overall = firstNumber(
+            ranks.leetify,
             rating.leetify,
             rating.leetify_rating,
             rating.overall
@@ -673,13 +665,11 @@ async function loadLeetifyStats() {
             rating.utility_rating
         );
 
-        // Premier rank
         const premier = firstNumber(
             ranks.premier,
             ranks.premier_rating
         );
 
-        // Win rate: Leetify returns a fraction from 0 to 1
         const winrate = numberOrNull(data.winrate);
 
         setStat(
@@ -701,11 +691,19 @@ async function loadLeetifyStats() {
                 : (winrate * 100).toFixed(1) + "%"
         );
 
-        setStat("totalMatches", formatInteger(data.total_matches));
+        setStat(
+            "totalMatches",
+            formatInteger(data.total_matches)
+        );
 
         const available = [
-            overall, premier, aim, positioning,
-            utility, winrate, data.total_matches
+            overall,
+            premier,
+            aim,
+            positioning,
+            utility,
+            winrate,
+            data.total_matches
         ].some(value => numberOrNull(value) !== null);
 
         if (!available) {
@@ -733,7 +731,7 @@ async function loadLeetifyStats() {
     }
 }
 
-/* Load stats when the page opens */
+/* Load stats when page opens */
 
 loadLeetifyStats();
 
