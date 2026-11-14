@@ -55,8 +55,6 @@ body::before {
     animation: glow 12s ease-in-out infinite alternate;
 }
 
-/* Background Animation */
-
 @keyframes glow {
     from { transform: scale(1); }
     to { transform: scale(1.1); }
@@ -142,7 +140,7 @@ h1 {
     font-weight: 600;
 }
 
-/* Steam Account Popup */
+/* Steam Popup */
 
 .steam-overlay {
     position: fixed;
@@ -257,6 +255,7 @@ h1 {
     font-size: 21px;
     font-weight: 800;
     color: #60a5fa;
+    flex-shrink: 0;
 }
 
 .steam-account.alt .steam-account-icon {
@@ -270,12 +269,6 @@ h1 {
 .steam-account-name {
     font-size: 15px;
     font-weight: 700;
-}
-
-.steam-account-desc {
-    margin-top: 5px;
-    color: #93a2b7;
-    font-size: 12px;
 }
 
 .steam-account-arrow {
@@ -643,7 +636,7 @@ h1 {
                 <div class="stat-value" id="totalMatches">—</div>
             </div>
 
-            <!-- Leetify Attribution Logo -->
+            <!-- Leetify Logo -->
 
             <a
                 class="stat-card leetify-logo-card"
@@ -728,9 +721,6 @@ h1 {
 
                 <div class="steam-account-info">
                     <div class="steam-account-name">Main</div>
-                    <div class="steam-account-desc">
-                        Main Steam account
-                    </div>
                 </div>
 
                 <span class="steam-account-arrow">↗</span>
@@ -749,9 +739,6 @@ h1 {
 
                 <div class="steam-account-info">
                     <div class="steam-account-name">Alt</div>
-                    <div class="steam-account-desc">
-                        Alternative Steam account
-                    </div>
                 </div>
 
                 <span class="steam-account-arrow">↗</span>
@@ -804,7 +791,6 @@ function openSteamPopup() {
 function closeSteamPopup(event) {
     const overlay = document.getElementById("steamOverlay");
 
-    // Ignore clicks inside the modal
     if (event && event.target !== overlay) {
         return;
     }
@@ -819,7 +805,6 @@ function closeSteamPopup(event) {
     }
 }
 
-// Close with Escape and keep keyboard focus inside the popup
 document.addEventListener("keydown", function(event) {
     const overlay = document.getElementById("steamOverlay");
 
@@ -975,7 +960,6 @@ async function loadLeetifyStats() {
         const rating = data.rating || {};
         const ranks = data.ranks || {};
 
-        // Leetify Rating
         const overall = firstNumber(
             ranks.leetify,
             rating.leetify,
@@ -983,31 +967,26 @@ async function loadLeetifyStats() {
             rating.overall
         );
 
-        // Aim
         const aim = firstNumber(
             rating.aim,
             rating.aim_rating
         );
 
-        // Positioning
         const positioning = firstNumber(
             rating.positioning,
             rating.positioning_rating
         );
 
-        // Utility
         const utility = firstNumber(
             rating.utility,
             rating.utility_rating
         );
 
-        // Premier
         const premier = firstNumber(
             ranks.premier,
             ranks.premier_rating
         );
 
-        // Win Rate
         const winrate = numberOrNull(data.winrate);
 
         setStat(
