@@ -308,14 +308,7 @@ h1 {
     color: #f84982;
 }
 
-/* Refresh Controls */
-
-.stats-controls {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-    gap: 5px;
-}
+/* Refresh Button with Integrated Timer */
 
 .refresh-btn {
     background: #1b2430;
@@ -328,6 +321,10 @@ h1 {
     font-size: 12px;
     font-weight: 600;
     white-space: nowrap;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
     transition: .2s;
 }
 
@@ -341,14 +338,9 @@ h1 {
     cursor: wait;
 }
 
-.stats-status {
-    color: var(--muted);
-    font-size: 11px;
-    white-space: nowrap;
-}
-
-.stats-status:empty {
-    display: none;
+.refresh-icon {
+    font-size: 15px;
+    line-height: 1;
 }
 
 /* Stat Cards */
@@ -539,10 +531,6 @@ h1 {
         font-size: 11px;
         padding: 8px 10px;
     }
-
-    .stats-status {
-        font-size: 10px;
-    }
 }
 </style>
 </head>
@@ -615,24 +603,19 @@ h1 {
                 </a>
             </h2>
 
-            <!-- Refresh Button and Hidden Timer -->
+            <!-- Refresh Button with Timer Inside -->
 
-            <div class="stats-controls">
+            <button
+                class="refresh-btn"
+                id="refreshStats"
+                type="button"
+                onclick="loadLeetifyStats(true)"
+                title="Refresh Leetify statistics">
 
-                <button
-                    class="refresh-btn"
-                    id="refreshStats"
-                    type="button"
-                    onclick="loadLeetifyStats(true)">
-                    ↻ Refresh Stats
-                </button>
+                <span class="refresh-icon" aria-hidden="true">↻</span>
+                <span id="refreshText">Refresh Stats</span>
 
-                <span
-                    class="stats-status"
-                    id="statsStatus"
-                    role="status"></span>
-
-            </div>
+            </button>
 
         </div>
 
@@ -877,14 +860,13 @@ let statsLoading = false;
 let lastUpdated = null;
 let showUpdateTimer = false;
 
-/* Update Timer */
+/* Update Button Text */
 
-function updateStatsTimer() {
-    const status = document.getElementById("statsStatus");
+function updateRefreshText() {
+    const text = document.getElementById("refreshText");
 
-    // Hide timer until Refresh Stats has been pressed
     if (!showUpdateTimer || lastUpdated === null) {
-        status.textContent = "";
+        text.textContent = "Refresh Stats";
         return;
     }
 
@@ -894,25 +876,25 @@ function updateStatsTimer() {
     );
 
     if (elapsed < 60) {
-        status.textContent =
+        text.textContent =
             "Updated " + elapsed +
             (elapsed === 1 ? " second ago" : " seconds ago");
     } else if (elapsed < 3600) {
         const minutes = Math.floor(elapsed / 60);
 
-        status.textContent =
+        text.textContent =
             "Updated " + minutes +
             (minutes === 1 ? " minute ago" : " minutes ago");
     } else if (elapsed < 86400) {
         const hours = Math.floor(elapsed / 3600);
 
-        status.textContent =
+        text.textContent =
             "Updated " + hours +
             (hours === 1 ? " hour ago" : " hours ago");
     } else {
         const days = Math.floor(elapsed / 86400);
 
-        status.textContent =
+        text.textContent =
             "Updated " + days +
             (days === 1 ? " day ago" : " days ago");
     }
@@ -969,16 +951,15 @@ async function loadLeetifyStats(manualRefresh = false) {
 
     statsLoading = true;
 
-    const status = document.getElementById("statsStatus");
     const errorMessage = document.getElementById("statsError");
     const button = document.getElementById("refreshStats");
+    const refreshText = document.getElementById("refreshText");
 
     button.disabled = true;
     errorMessage.textContent = "";
 
-    // Only display status when manually refreshing
     if (manualRefresh) {
-        status.textContent = "Refreshing...";
+        refreshText.textContent = "Refreshing...";
     }
 
     try {
@@ -1073,11 +1054,12 @@ async function loadLeetifyStats(manualRefresh = false) {
             throw new Error("No supported statistics found");
         }
 
-        // Only start timer after a successful manual refresh
+        /* Start/reset timer only after manual refresh */
+
         if (manualRefresh) {
             lastUpdated = Date.now();
             showUpdateTimer = true;
-            updateStatsTimer();
+            updateRefreshText();
         }
 
     } catch (error) {
@@ -1086,11 +1068,7 @@ async function loadLeetifyStats(manualRefresh = false) {
         errorMessage.textContent =
             "Unable to refresh Leetify statistics. Please try again later.";
 
-        if (manualRefresh && lastUpdated === null) {
-            status.textContent = "";
-        } else {
-            updateStatsTimer();
-        }
+        updateRefreshText();
 
     } finally {
         statsLoading = false;
@@ -1102,11 +1080,11 @@ async function loadLeetifyStats(manualRefresh = false) {
 
 setInterval(() => {
     if (!statsLoading) {
-        updateStatsTimer();
+        updateRefreshText();
     }
 }, 1000);
 
-/* Load stats automatically without showing timer */
+/* Load stats automatically without starting timer */
 
 loadLeetifyStats(false);
 
