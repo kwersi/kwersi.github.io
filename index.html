@@ -66,16 +66,22 @@ body::before {
 }
 
 @keyframes glow {
-    from { transform: scale(1); }
-    to { transform: scale(1.1); }
+    from {
+        transform: scale(1);
+    }
+    to {
+        transform: scale(1.1);
+    }
 }
 
-/* Profile */
+/* Main Container */
 
 .container {
     width: 100%;
     max-width: 560px;
 }
+
+/* Profile */
 
 .profile {
     text-align: center;
@@ -85,6 +91,7 @@ body::before {
 .avatar {
     width: 160px;
     height: 160px;
+    display: block;
     margin: 0 auto;
     border-radius: 50%;
     object-fit: cover;
@@ -170,7 +177,7 @@ h1 {
     opacity: 1;
 }
 
-/* Settings Download Button */
+/* CS2 Settings Button */
 
 .settings-btn {
     position: fixed;
@@ -186,7 +193,8 @@ h1 {
     border-radius: 50%;
     transition: .2s ease;
     z-index: 1000;
-    box-shadow: 0 0 20px rgba(88,101,242,.12);
+    box-shadow:
+        0 0 20px rgba(88,101,242,.12);
 }
 
 .settings-btn:hover {
@@ -201,93 +209,37 @@ h1 {
     object-fit: contain;
 }
 
-/* Music Player Button */
+/* Always Visible YouTube Player */
 
-.music-button {
+.music-popup {
     position: fixed;
     bottom: 24px;
     left: 24px;
-    padding: 14px 22px;
-    background: #121821;
-    border: 1px solid #253142;
-    border-radius: 14px;
-    color: white;
-    font-family: 'Inter', sans-serif;
-    font-size: 14px;
-    font-weight: 600;
-    cursor: pointer;
-    z-index: 1001;
-    transition: .2s ease;
-    box-shadow: 0 0 20px rgba(88,101,242,.12);
-}
-
-.music-button:hover {
-    background: #18212d;
-    border-color: #5865f2;
-    transform: translateY(-3px);
-}
-
-/* YouTube Video Popup */
-
-.music-popup {
-    display: none;
-    position: fixed;
-    bottom: 90px;
-    left: 24px;
-    width: min(420px, calc(100vw - 48px));
-    padding: 18px;
+    width: min(360px, calc(100vw - 48px));
+    padding: 14px;
     background: #121821;
     border: 1px solid #253142;
     border-radius: 18px;
     box-shadow: 0 15px 50px rgba(0,0,0,.6);
     z-index: 1002;
-    animation: popupAppear .2s ease;
-}
-
-.music-popup.active {
-    display: block;
-}
-
-@keyframes popupAppear {
-    from {
-        opacity: 0;
-        transform: translateY(10px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
 }
 
 .music-header {
     display: flex;
-    justify-content: space-between;
     align-items: center;
-    margin-bottom: 14px;
+    margin-bottom: 12px;
 }
 
 .music-header h3 {
     font-size: 15px;
     font-weight: 700;
-}
-
-.music-close {
-    background: transparent;
-    border: none;
-    color: #93a2b7;
-    font-size: 24px;
-    cursor: pointer;
-    transition: .2s;
-}
-
-.music-close:hover {
     color: white;
 }
 
 .music-popup p {
-    color: var(--muted);
+    color: #93a2b7;
     font-size: 13px;
-    margin-bottom: 14px;
+    margin-bottom: 12px;
 }
 
 .video-container {
@@ -299,12 +251,13 @@ h1 {
 }
 
 .video-container iframe {
+    display: block;
     width: 100%;
     height: 100%;
     border: none;
 }
 
-/* Mobile */
+/* Mobile Responsiveness */
 
 @media (max-width: 600px) {
     .avatar {
@@ -316,20 +269,19 @@ h1 {
         font-size: 1.8rem;
     }
 
-    .music-button {
-        left: 15px;
-        bottom: 20px;
-    }
-
     .music-popup {
         left: 15px;
-        bottom: 80px;
-        width: calc(100vw - 30px);
+        bottom: 15px;
+        width: min(300px, calc(100vw - 30px));
     }
 
     .settings-btn {
         right: 15px;
         bottom: 20px;
+    }
+
+    .container {
+        padding-bottom: 280px;
     }
 }
 </style>
@@ -337,9 +289,12 @@ h1 {
 
 <body>
 
+<!-- Main Profile -->
+
 <div class="container">
 
     <div class="profile">
+
         <img
             src="dust.gif"
             alt="kwersi"
@@ -350,11 +305,15 @@ h1 {
         <div class="username">
             @kwersi
         </div>
+
     </div>
+
+    <!-- Social Links -->
 
     <div class="links">
 
         <!-- Twitter -->
+
         <a
             class="link"
             href="https://x.com/kwersi"
@@ -366,10 +325,14 @@ h1 {
                 alt="X"
                 class="icon">
 
-            <div class="link-title">twitter</div>
+            <div class="link-title">
+                twitter
+            </div>
+
         </a>
 
         <!-- Steam -->
+
         <a
             class="link"
             href="https://steamcommunity.com/profiles/76561198354031646"
@@ -381,10 +344,14 @@ h1 {
                 alt="Steam"
                 class="icon">
 
-            <div class="link-title">steam</div>
+            <div class="link-title">
+                steam
+            </div>
+
         </a>
 
         <!-- Faceit -->
+
         <a
             class="link"
             href="https://www.faceit.com/en/players/kwersi"
@@ -396,10 +363,14 @@ h1 {
                 alt="Faceit"
                 class="icon">
 
-            <div class="link-title">faceit</div>
+            <div class="link-title">
+                faceit
+            </div>
+
         </a>
 
         <!-- Discord -->
+
         <div
             class="link discord-card"
             onclick="copyDiscord()">
@@ -412,9 +383,11 @@ h1 {
             <div class="link-title">
                 discord • @kwersi
             </div>
+
         </div>
 
     </div>
+
 </div>
 
 <!-- CS2 Settings Download -->
@@ -428,55 +401,42 @@ h1 {
     <img
         src="icons/cog.svg"
         alt="Settings">
+
 </a>
 
-<!-- Discord Toast -->
+<!-- Discord Notification -->
 
 <div id="toast" class="toast" role="status">
     Copied Discord username: @kwersi
 </div>
 
-<!-- Music Player Button -->
+<!-- Always Visible YouTube Player -->
 
-<button
-    class="music-button"
-    onclick="toggleMusic()">
-    ♫ Music Player
-</button>
-
-<!-- YouTube Popup -->
-
-<div class="music-popup" id="musicPopup">
+<div class="music-popup">
 
     <div class="music-header">
         <h3>♫ Now Playing</h3>
-
-        <button
-            class="music-close"
-            onclick="toggleMusic()"
-            aria-label="Close music player">
-            ×
-        </button>
     </div>
 
     <p>Paradisio</p>
 
     <div class="video-container">
+
         <iframe
-            id="youtubePlayer"
-            title="Paradisio Video"
-            src=""
+            src="https://www.youtube.com/embed/7B44gyvBsTA"
+            title="Paradisio"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
             referrerpolicy="strict-origin-when-cross-origin"
             allowfullscreen>
         </iframe>
+
     </div>
 
 </div>
 
-<script>
+<!-- JavaScript -->
 
-/* Discord Copy */
+<script>
 
 let toastTimeout;
 
@@ -496,36 +456,6 @@ function copyDiscord() {
         .catch(() => {
             alert("Discord username: @kwersi");
         });
-}
-
-/* YouTube Music Player */
-
-/*
-    REPLACE YOUR_VIDEO_ID
-    with the ID from your YouTube link.
-
-    Example:
-    https://www.youtube.com/watch?v=dQw4w9WgXcQ
-
-    Video ID: dQw4w9WgXcQ
-*/
-
-const youtubeVideoId = "7B44gyvBsTA";
-
-function toggleMusic() {
-    const popup = document.getElementById("musicPopup");
-    const player = document.getElementById("youtubePlayer");
-
-    const isOpen = popup.classList.toggle("active");
-
-    if (isOpen) {
-        player.src =
-            "https://www.youtube.com/embed/" +
-            youtubeVideoId;
-    } else {
-        // Stop the video when closing the popup
-        player.src = "";
-    }
 }
 
 </script>
