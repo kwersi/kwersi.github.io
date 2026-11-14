@@ -1,145 +1,250 @@
- 
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My First Website</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>kwer.si</title>
 
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        /* Cat in bottom-left corner */
-            .corner-cat {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            width: 150px;
-            height: auto;
-            z-index: 1000;
-            pointer-events: none;
-        }
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #111827;
-            color: white;
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
 
-        <img
-          src="cat.gif"
-          class="corner-cat"
-          alt="Corner cat"
-        />
-        }
+:root{
+    --bg:#0b0f14;
+    --card:#121821;
+    --card-hover:#18212d;
+    --border:#253142;
+    --text:#ffffff;
+    --muted:#93a2b7;
+    --accent:#5865f2;
+}
 
-        /* Navigation */
-        nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 25px 10%;
-            background-color: #1f2937;
-        }
+body{
+    font-family:'Inter',sans-serif;
+    background:var(--bg);
+    color:var(--text);
+    min-height:100vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:24px;
+}
 
-        nav h2 {
-            color: #60a5fa;
-        }
+.container{
+    width:100%;
+    max-width:560px;
+}
 
-        nav a {
-            color: white;
-            text-decoration: none;
-            margin-left: 20px;
-        }
+.profile{
+    text-align:center;
+    margin-bottom:40px;
+}
 
-        nav a:hover {
-            color: #60a5fa;
-        }
+.avatar{
+    width:160px;
+    height:160px;
+    margin:0 auto;
+    border-radius:50%;
+    background:linear-gradient(
+        135deg,
+        #5865f2,
+        #7c3aed
+    );
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:64px;
+    font-weight:800;
+    color:white;
+    border:3px solid var(--border);
 
-        /* Main section */
-        .hero {
-            min-height: 80vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            padding: 20px;
-        }
+    box-shadow:
+        0 0 40px rgba(88,101,242,.20),
+        0 0 100px rgba(124,58,237,.10);
+}
 
-        .hero h1 {
-            font-size: 48px;
-            margin-bottom: 20px;
-        }
+h1{
+    margin-top:24px;
+    font-size:2.2rem;
+    font-weight:800;
+}
 
-        .hero p {
-            font-size: 18px;
-            color: #9ca3af;
-            margin-bottom: 30px;
-        }
+.username{
+    margin-top:10px;
+    color:var(--muted);
+    font-size:1rem;
+}
 
-        button {
-            padding: 14px 30px;
-            border: none;
-            border-radius: 8px;
-            background-color: #3b82f6;
-            color: white;
-            font-size: 16px;
-            cursor: pointer;
-            transition: 0.2s;
-        }
+.links{
+    display:flex;
+    flex-direction:column;
+    gap:14px;
+}
 
-        button:hover {
-            background-color: #2563eb;
-            transform: scale(1.05);
-        }
+.link{
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:18px;
+    padding:18px 22px;
 
-        /* Footer */
-        footer {
-            text-align: center;
-            padding: 25px;
-            background-color: #1f2937;
-            color: #9ca3af;
-        }
-    </style>
+    display:flex;
+    align-items:center;
+    gap:16px;
+
+    color:white;
+    text-decoration:none;
+
+    transition:.2s ease;
+}
+
+.link:hover{
+    transform:translateY(-3px);
+    background:var(--card-hover);
+    border-color:#3d5068;
+}
+
+.icon{
+    width:28px;
+    height:28px;
+    object-fit:contain;
+}
+
+.link-title{
+    font-weight:600;
+    font-size:1rem;
+}
+
+.discord-card{
+    cursor:pointer;
+}
+
+.toast{
+    position:fixed;
+    left:50%;
+    bottom:24px;
+    transform:translateX(-50%);
+    background:#1b2430;
+    border:1px solid #334155;
+    color:white;
+    padding:12px 18px;
+    border-radius:12px;
+    opacity:0;
+    transition:.25s;
+    pointer-events:none;
+}
+
+.toast.show{
+    opacity:1;
+}
+
+@media (max-width:600px){
+
+    .avatar{
+        width:130px;
+        height:130px;
+        font-size:52px;
+    }
+
+    h1{
+        font-size:1.9rem;
+    }
+
+}
+</style>
 </head>
 
 <body>
 
-    <nav>
-        <h2>My Website</h2>
+<div class="container">
 
-        <div>
-            <a href="#home">Home</a>
-            <a href="#about">About</a>
-            <a href="#contact">Contact</a>
+    <div class="profile">
+
+        <div class="avatar">K</div>
+
+        <h1>kwersi</h1>
+
+        <div class="username">
+            @kwersi
         </div>
-    </nav>
 
-    <section class="hero" id="home">
-        <h1>Welcome to My Website!</h1>
+    </div>
 
-        <p>This is my first website hosted on GitHub.</p>
+    <div class="links"
 
-        <button onclick="showMessage()">
-            Click Me
-        </button>
+        <a
+            class="link"
+            href="https://x.com/kwersi"
+            target="_blank">
 
-        <p id="message" style="margin-top: 25px;"></p>
-    </section>
+            <img
+                src="icons/x.svg"
+                alt="X"
+                class="icon">
 
-    <footer>
-        <p>© 2026 My Website. All rights reserved.</p>
-    </footer>
+            <div class="link-title">
+                X / Twitter
+            </div>
 
-    <script>
-        function showMessage() {
-            document.getElementById("message").textContent =
-                "Congratulations! Your website is working!";
-        }
-    </script>
+        </a>
+
+        <a
+            class="link"
+            href="https://steamcommunity.com/id/kwersi"
+            target="_blank">
+
+            <img
+                src="icons/steam.svg"
+                alt="Steam"
+                class="icon">
+
+            <div class="link-title">
+                Steam
+            </div>
+
+        </a>
+
+        <div
+            class="link discord-card"
+            onclick="copyDiscord()">
+
+            <img
+                src="icons/discord.svg"
+                alt="Discord"
+                class="icon">
+
+            <div class="link-title">
+                Discord • @kwersi
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<div id="toast" class="toast">
+    Copied Discord username: @kwersi
+</div>
+
+<script>
+function copyDiscord() {
+    navigator.clipboard.writeText("@kwersi");
+
+    const toast = document.getElementById("toast");
+
+    toast.classList.add("show");
+
+    setTimeout(() => {
+        toast.classList.remove("show");
+    }, 2000);
+}
+</script>
 
 </body>
 </html>
