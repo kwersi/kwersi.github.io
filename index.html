@@ -17,14 +17,14 @@
 }
 
 :root {
-    --bg: #10151c;
-    --card: #202732;
-    --card-hover: #2b3541;
-    --inner-card: #151b24;
-    --border: #35414e;
-    --text: #f5f5f5;
-    --muted: #a7b4c2;
-    --accent: #66a7e8;
+    --bg: #0b0f14;
+    --card: #121821;
+    --card-hover: #18212d;
+    --inner-card: #0b0f14;
+    --border: #253142;
+    --text: #ffffff;
+    --muted: #93a2b7;
+    --accent: #5865f2;
 }
 
 body {
@@ -41,34 +41,40 @@ body {
     isolation: isolate;
 }
 
-/* Smooth Steam Profile Background */
+/* Original Animated Background */
 
 body::before {
     content: "";
     position: fixed;
     inset: 0;
-    z-index: -1;
-    pointer-events: none;
-
     background:
         radial-gradient(
-            ellipse 42% 65% at 15% 35%,
-            rgba(20, 74, 72, .55),
-            transparent 100%
+            circle at top center,
+            rgba(88,101,242,.15),
+            transparent 40%
         ),
         radial-gradient(
-            ellipse 45% 65% at 85% 35%,
-            rgba(74, 37, 72, .48),
-            transparent 100%
+            circle at bottom right,
+            rgba(124,58,237,.10),
+            transparent 35%
         ),
-        linear-gradient(
-            115deg,
-            #0b1519 0%,
-            #17282c 28%,
-            #242a37 52%,
-            #29202e 76%,
-            #101017 100%
+        radial-gradient(
+            circle at bottom left,
+            rgba(59,130,246,.08),
+            transparent 30%
         );
+    pointer-events: none;
+    z-index: -1;
+    animation: glow 12s ease-in-out infinite alternate;
+}
+
+@keyframes glow {
+    from {
+        transform: scale(1);
+    }
+    to {
+        transform: scale(1.1);
+    }
 }
 
 /* Profile */
@@ -91,7 +97,9 @@ body::before {
     border-radius: 50%;
     object-fit: cover;
     border: 3px solid var(--border);
-    box-shadow: 0 8px 35px rgba(0,0,0,.25);
+    box-shadow:
+        0 0 40px rgba(88,101,242,.20),
+        0 0 100px rgba(124,58,237,.10);
 }
 
 h1 {
@@ -122,7 +130,7 @@ h1 {
     display: flex;
     align-items: center;
     gap: 16px;
-    color: var(--text);
+    color: white;
     text-decoration: none;
     font-family: inherit;
     text-align: left;
@@ -134,7 +142,7 @@ h1 {
 .link:hover {
     transform: translateY(-3px);
     background: var(--card-hover);
-    border-color: #596773;
+    border-color: #3d5068;
 }
 
 .icon {
@@ -175,8 +183,8 @@ h1 {
 .steam-modal {
     width: 100%;
     max-width: 390px;
-    background: var(--card);
-    border: 1px solid var(--border);
+    background: #121821;
+    border: 1px solid #334155;
     border-radius: 20px;
     padding: 24px;
     box-shadow: 0 20px 70px rgba(0,0,0,.65);
@@ -214,17 +222,17 @@ h1 {
 .steam-close {
     width: 32px;
     height: 32px;
-    background: #30373d;
-    border: 1px solid #46515b;
+    background: #1b2430;
+    border: 1px solid #334155;
     border-radius: 9px;
-    color: var(--muted);
+    color: #93a2b7;
     font-size: 22px;
     cursor: pointer;
     transition: .2s;
 }
 
 .steam-close:hover {
-    background: #40505c;
+    background: #263548;
     color: white;
 }
 
@@ -239,8 +247,8 @@ h1 {
     align-items: center;
     gap: 14px;
     padding: 17px;
-    background: var(--inner-card);
-    border: 1px solid var(--border);
+    background: #0b0f14;
+    border: 1px solid #253142;
     border-radius: 13px;
     text-decoration: none;
     color: white;
@@ -248,15 +256,15 @@ h1 {
 }
 
 .steam-account:hover {
-    background: var(--card-hover);
-    border-color: var(--accent);
+    background: #18212d;
+    border-color: #5865f2;
     transform: translateY(-2px);
 }
 
 .steam-account-icon {
     width: 42px;
     height: 42px;
-    background: #30373d;
+    background: #18212d;
     border-radius: 11px;
     display: flex;
     align-items: center;
@@ -281,7 +289,7 @@ h1 {
 }
 
 .steam-account-arrow {
-    color: var(--muted);
+    color: #93a2b7;
     font-size: 19px;
 }
 
@@ -321,9 +329,9 @@ h1 {
 /* Refresh Button */
 
 .refresh-btn {
-    background: #30373d;
+    background: #1b2430;
     color: white;
-    border: 1px solid #46515b;
+    border: 1px solid #334155;
     padding: 9px 13px;
     border-radius: 9px;
     cursor: pointer;
@@ -339,8 +347,8 @@ h1 {
 }
 
 .refresh-btn:hover {
-    background: #40505c;
-    border-color: var(--accent);
+    background: #263548;
+    border-color: #5865f2;
 }
 
 .refresh-btn:disabled {
@@ -362,7 +370,7 @@ h1 {
 }
 
 .stat-card {
-    background: var(--inner-card);
+    background: #0b0f14;
     border: 1px solid var(--border);
     border-radius: 12px;
     padding: 16px;
@@ -416,7 +424,7 @@ h1 {
 }
 
 .leetify-logo-card:hover {
-    background: var(--card-hover);
+    background: #121821;
     border-color: #f84982;
     transform: translateY(-2px);
 }
@@ -441,8 +449,8 @@ h1 {
     left: 50%;
     bottom: 90px;
     transform: translateX(-50%);
-    background: #30373d;
-    border: 1px solid #46515b;
+    background: #1b2430;
+    border: 1px solid #334155;
     color: white;
     padding: 12px 18px;
     border-radius: 12px;
@@ -467,8 +475,8 @@ h1 {
     justify-content: center;
     gap: 12px;
     padding: 16px 22px;
-    background: var(--card);
-    border: 1px solid var(--border);
+    background: #121821;
+    border: 1px solid #253142;
     border-radius: 16px;
     color: white;
     font-family: inherit;
@@ -477,13 +485,13 @@ h1 {
     text-decoration: none;
     transition: .2s ease;
     z-index: 1000;
-    box-shadow: 0 5px 20px rgba(0,0,0,.15);
+    box-shadow: 0 0 20px rgba(88,101,242,.12);
 }
 
 .settings-btn:hover {
     transform: translateY(-3px);
-    background: var(--card-hover);
-    border-color: var(--accent);
+    background: #18212d;
+    border-color: #5865f2;
 }
 
 .settings-btn img {
@@ -540,6 +548,12 @@ h1 {
     .refresh-btn {
         font-size: 11px;
         padding: 8px 10px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    body::before {
+        animation: none;
     }
 }
 </style>
