@@ -16,25 +16,67 @@
 }
 
 
-    /* Video button */
-.video-button {
+/* Music player button */
+.music-button {
     position: fixed;
     bottom: 20px;
     left: 20px;
-    padding: 12px 22px;
-    background-color: #3b82f6;
+    padding: 12px 20px;
+    background: #3b82f6;
     color: white;
-    text-decoration: none;
+    border: none;
     border-radius: 8px;
-    font-size: 14px;
-    font-weight: bold;
+    cursor: pointer;
     z-index: 1001;
-    transition: 0.2s;
 }
 
-.video-button:hover {
-    background-color: #2563eb;
-    transform: scale(1.05);
+/* Music popup */
+.music-popup {
+    display: none;
+    position: fixed;
+    bottom: 75px;
+    left: 20px;
+    width: 300px;
+    padding: 20px;
+    background: #1f2937;
+    border: 1px solid #374151;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    z-index: 1002;
+}
+
+.music-popup.active {
+    display: block;
+}
+
+.music-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.music-header h3 {
+    font-size: 16px;
+    color: white;
+}
+
+.music-close {
+    background: none;
+    border: none;
+    color: #9ca3af;
+    font-size: 22px;
+    cursor: pointer;
+}
+
+.music-popup p {
+    color: #9ca3af;
+    font-size: 13px;
+    margin-bottom: 15px;
+}
+
+.music-popup audio {
+    width: 100%;
 }
 :root{
     --bg:#0b0f14;
@@ -369,15 +411,36 @@ function copyDiscord() {
         toast.classList.remove("show");
     }, 2000);
 }
+
+    function toggleMusic() {
+    const popup = document.getElementById("musicPopup");
+
+    popup.classList.toggle("active");
+}
     </script>
     
     
-        <a href="./paradisio.mp4"
-       target="_blank"
-       rel="noopener"
-       class="video-button">
-        ▶ Watch Video
-    </a>
+ <!-- Music player button -->
+<button class="music-button" onclick="toggleMusic()">
+    ♫ Music Player
+</button>
+
+<!-- Music popup -->
+<div class="music-popup" id="musicPopup">
+
+    <div class="music-header">
+        <h3>♫ Now Playing</h3>
+        <button class="music-close" onclick="toggleMusic()">×</button>
+    </div>
+
+    <p>Paradisio</p>
+
+    <audio id="musicPlayer" controls>
+        <source src="./paradisio.mp4" type="audio/mp4">
+        Your browser does not support audio playback.
+    </audio>
+
+</div>
     
 </body>
 </html>
