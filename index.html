@@ -347,6 +347,10 @@ h1 {
     white-space: nowrap;
 }
 
+.stats-status:empty {
+    display: none;
+}
+
 /* Stat Cards */
 
 .stats-grid {
@@ -601,8 +605,6 @@ h1 {
 
         <div class="stats-header">
 
-            <!-- Clickable Heading -->
-
             <h2>
                 <a
                     class="leetify-heading"
@@ -613,7 +615,7 @@ h1 {
                 </a>
             </h2>
 
-            <!-- Refresh Button and Timer -->
+            <!-- Refresh Button and Hidden Timer -->
 
             <div class="stats-controls">
 
@@ -621,16 +623,14 @@ h1 {
                     class="refresh-btn"
                     id="refreshStats"
                     type="button"
-                    onclick="loadLeetifyStats()">
+                    onclick="loadLeetifyStats(true)">
                     ↻ Refresh Stats
                 </button>
 
                 <span
                     class="stats-status"
                     id="statsStatus"
-                    role="status">
-                    Loading...
-                </span>
+                    role="status"></span>
 
             </div>
 
@@ -675,8 +675,6 @@ h1 {
                 <div class="stat-value" id="totalMatches">—</div>
             </div>
 
-            <!-- Leetify Attribution -->
-
             <a
                 class="stat-card leetify-logo-card"
                 href="https://leetify.com/"
@@ -688,8 +686,6 @@ h1 {
             </a>
 
         </div>
-
-        <!-- Only visible if API fails -->
 
         <p class="stats-error" id="statsError" role="alert"></p>
 
@@ -730,8 +726,6 @@ h1 {
 
         <div class="steam-accounts">
 
-            <!-- Main -->
-
             <a
                 class="steam-account"
                 href="https://steamcommunity.com/profiles/76561198354031646"
@@ -747,8 +741,6 @@ h1 {
                 <span class="steam-account-arrow">↗</span>
 
             </a>
-
-            <!-- Alt -->
 
             <a
                 class="steam-account alt"
@@ -883,13 +875,18 @@ const LEETIFY_API =
 
 let statsLoading = false;
 let lastUpdated = null;
+let showUpdateTimer = false;
 
 /* Update Timer */
 
 function updateStatsTimer() {
     const status = document.getElementById("statsStatus");
 
-    if (lastUpdated === null) return;
+    // Hide timer until Refresh Stats has been pressed
+    if (!showUpdateTimer || lastUpdated === null) {
+        status.textContent = "";
+        return;
+    }
 
     const elapsed = Math.max(
         0,
@@ -967,7 +964,7 @@ function formatInteger(value) {
 
 /* Fetch Leetify Statistics */
 
-async function loadLeetifyStats() {
+async function loadLeetifyStats(manualRefresh = false) {
     if (statsLoading) return;
 
     statsLoading = true;
@@ -977,8 +974,12 @@ async function loadLeetifyStats() {
     const button = document.getElementById("refreshStats");
 
     button.disabled = true;
-    status.textContent = "Refreshing...";
     errorMessage.textContent = "";
+
+    // Only display status when manually refreshing
+    if (manualRefresh) {
+        status.textContent = "Refreshing...";
+    }
 
     try {
         const response = await fetch(LEETIFY_API, {
@@ -1072,10 +1073,12 @@ async function loadLeetifyStats() {
             throw new Error("No supported statistics found");
         }
 
-        /* Reset timer only after successful refresh */
-
-        lastUpdated = Date.now();
-        updateStatsTimer();
+        // Only start timer after a successful manual refresh
+        if (manualRefresh) {
+            lastUpdated = Date.now();
+            showUpdateTimer = true;
+            updateStatsTimer();
+        }
 
     } catch (error) {
         console.error("Leetify API error:", error);
@@ -1083,8 +1086,8 @@ async function loadLeetifyStats() {
         errorMessage.textContent =
             "Unable to refresh Leetify statistics. Please try again later.";
 
-        if (lastUpdated === null) {
-            status.textContent = "Unavailable";
+        if (manualRefresh && lastUpdated === null) {
+            status.textContent = "";
         } else {
             updateStatsTimer();
         }
@@ -1103,9 +1106,9 @@ setInterval(() => {
     }
 }, 1000);
 
-/* Load stats automatically */
+/* Load stats automatically without showing timer */
 
-loadLeetifyStats();
+loadLeetifyStats(false);
 
 </script>
 
