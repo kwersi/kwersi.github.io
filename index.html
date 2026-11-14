@@ -33,6 +33,47 @@ body{
     justify-content:center;
     align-items:center;
     padding:24px;
+    position:relative;
+    overflow-x:hidden;
+}
+
+/* Animated Background Glow */
+
+body::before{
+    content:"";
+    position:fixed;
+    inset:0;
+
+    background:
+        radial-gradient(
+            circle at top center,
+            rgba(88,101,242,.15),
+            transparent 40%
+        ),
+        radial-gradient(
+            circle at bottom right,
+            rgba(124,58,237,.10),
+            transparent 35%
+        ),
+        radial-gradient(
+            circle at bottom left,
+            rgba(59,130,246,.08),
+            transparent 30%
+        );
+
+    pointer-events:none;
+    z-index:-1;
+
+    animation:glow 12s ease-in-out infinite alternate;
+}
+
+@keyframes glow{
+    from{
+        transform:scale(1);
+    }
+    to{
+        transform:scale(1.1);
+    }
 }
 
 .container{
@@ -51,6 +92,7 @@ body{
     margin:0 auto;
     border-radius:50%;
     object-fit:cover;
+
     border:3px solid var(--border);
 
     box-shadow:
@@ -79,6 +121,7 @@ h1{
     background:var(--card);
     border:1px solid var(--border);
     border-radius:18px;
+
     padding:18px 22px;
 
     display:flex;
@@ -101,6 +144,7 @@ h1{
     width:28px;
     height:28px;
     object-fit:contain;
+    flex-shrink:0;
 }
 
 .link-title{
@@ -120,6 +164,7 @@ h1{
 
     background:#1b2430;
     border:1px solid #334155;
+
     color:white;
 
     padding:12px 18px;
@@ -235,6 +280,23 @@ h1{
 
             <div class="link-title">
                 Steam
+            </div>
+
+        </a>
+
+        <a
+            class="link"
+            href="https://www.faceit.com/en/players/kwersi"
+            target="_blank"
+            rel="noopener noreferrer">
+
+            <img
+                src="icons/faceit.svg"
+                alt="Faceit"
+                class="icon">
+
+            <div class="link-title">
+                Faceit
             </div>
 
         </a>
