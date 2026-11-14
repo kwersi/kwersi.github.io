@@ -1,5 +1,20 @@
 
-/* Steam-inspired profile background */
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>chud site</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
 :root {
     --bg: #10151c;
@@ -25,6 +40,8 @@ body {
     overflow-x: hidden;
     isolation: isolate;
 }
+
+/* Smooth Steam Profile Background */
 
 body::before {
     content: "";
@@ -53,3 +70,1029 @@ body::before {
             #101017 100%
         );
 }
+
+/* Profile */
+
+.container {
+    width: 100%;
+    max-width: 560px;
+}
+
+.profile {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.avatar {
+    width: 160px;
+    height: 160px;
+    display: block;
+    margin: 0 auto;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid var(--border);
+    box-shadow: 0 8px 35px rgba(0,0,0,.25);
+}
+
+h1 {
+    margin-top: 24px;
+    font-size: 2.2rem;
+    font-weight: 800;
+}
+
+.username {
+    margin-top: 10px;
+    color: var(--muted);
+}
+
+/* Social Links */
+
+.links {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.link {
+    width: 100%;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    padding: 18px 22px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    color: var(--text);
+    text-decoration: none;
+    font-family: inherit;
+    text-align: left;
+    font-size: inherit;
+    cursor: pointer;
+    transition: .2s ease;
+}
+
+.link:hover {
+    transform: translateY(-3px);
+    background: var(--card-hover);
+    border-color: #596773;
+}
+
+.icon {
+    width: 28px;
+    height: 28px;
+    object-fit: contain;
+    flex-shrink: 0;
+}
+
+.link-title {
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+/* Steam Popup */
+
+.steam-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,.75);
+    backdrop-filter: blur(7px);
+    -webkit-backdrop-filter: blur(7px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    z-index: 3000;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity .2s ease, visibility .2s ease;
+}
+
+.steam-overlay.show {
+    opacity: 1;
+    visibility: visible;
+}
+
+.steam-modal {
+    width: 100%;
+    max-width: 390px;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 24px;
+    box-shadow: 0 20px 70px rgba(0,0,0,.65);
+    transform: translateY(12px) scale(.97);
+    transition: transform .2s ease;
+}
+
+.steam-overlay.show .steam-modal {
+    transform: translateY(0) scale(1);
+}
+
+.steam-modal-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 22px;
+}
+
+.steam-modal-title {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.steam-modal-title img {
+    width: 28px;
+    height: 28px;
+}
+
+.steam-modal-title h2 {
+    font-size: 18px;
+    font-weight: 700;
+}
+
+.steam-close {
+    width: 32px;
+    height: 32px;
+    background: #30373d;
+    border: 1px solid #46515b;
+    border-radius: 9px;
+    color: var(--muted);
+    font-size: 22px;
+    cursor: pointer;
+    transition: .2s;
+}
+
+.steam-close:hover {
+    background: #40505c;
+    color: white;
+}
+
+.steam-accounts {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.steam-account {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 17px;
+    background: var(--inner-card);
+    border: 1px solid var(--border);
+    border-radius: 13px;
+    text-decoration: none;
+    color: white;
+    transition: .2s ease;
+}
+
+.steam-account:hover {
+    background: var(--card-hover);
+    border-color: var(--accent);
+    transform: translateY(-2px);
+}
+
+.steam-account-icon {
+    width: 42px;
+    height: 42px;
+    background: #30373d;
+    border-radius: 11px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 21px;
+    font-weight: 800;
+    color: #60a5fa;
+    flex-shrink: 0;
+}
+
+.steam-account.alt .steam-account-icon {
+    color: #a78bfa;
+}
+
+.steam-account-info {
+    flex: 1;
+}
+
+.steam-account-name {
+    font-size: 15px;
+    font-weight: 700;
+}
+
+.steam-account-arrow {
+    color: var(--muted);
+    font-size: 19px;
+}
+
+/* Leetify Stats */
+
+.stats-section {
+    margin-top: 32px;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    padding: 22px;
+}
+
+.stats-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 20px;
+}
+
+.stats-header h2 {
+    font-size: 17px;
+    font-weight: 700;
+}
+
+.leetify-heading {
+    color: white;
+    text-decoration: none;
+    transition: color .2s ease;
+}
+
+.leetify-heading:hover {
+    color: #f84982;
+}
+
+/* Refresh Button */
+
+.refresh-btn {
+    background: #30373d;
+    color: white;
+    border: 1px solid #46515b;
+    padding: 9px 13px;
+    border-radius: 9px;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 12px;
+    font-weight: 600;
+    white-space: nowrap;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    transition: .2s;
+}
+
+.refresh-btn:hover {
+    background: #40505c;
+    border-color: var(--accent);
+}
+
+.refresh-btn:disabled {
+    opacity: .5;
+    cursor: wait;
+}
+
+.refresh-icon {
+    font-size: 15px;
+    line-height: 1;
+}
+
+/* Stat Cards */
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+}
+
+.stat-card {
+    background: var(--inner-card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 16px;
+    min-width: 0;
+}
+
+.stat-label {
+    color: var(--muted);
+    font-size: 12px;
+    margin-bottom: 9px;
+}
+
+.stat-value {
+    font-size: 26px;
+    font-weight: 800;
+    overflow-wrap: anywhere;
+}
+
+.stat-value.pink {
+    color: #f84982;
+}
+
+.stat-value.blue {
+    color: #60a5fa;
+}
+
+.stat-value.purple {
+    color: #a78bfa;
+}
+
+.stat-value.green {
+    color: #34d399;
+}
+
+/* Leetify Logo */
+
+.leetify-logo-card {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    transition: .2s ease;
+}
+
+.leetify-logo-card img {
+    display: block;
+    width: 100%;
+    max-width: 170px;
+    height: auto;
+    object-fit: contain;
+}
+
+.leetify-logo-card:hover {
+    background: var(--card-hover);
+    border-color: #f84982;
+    transform: translateY(-2px);
+}
+
+/* API Error */
+
+.stats-error {
+    margin-top: 14px;
+    font-size: 12px;
+    line-height: 1.6;
+    color: #f87171;
+}
+
+.stats-error:empty {
+    display: none;
+}
+
+/* Discord Notification */
+
+.toast {
+    position: fixed;
+    left: 50%;
+    bottom: 90px;
+    transform: translateX(-50%);
+    background: #30373d;
+    border: 1px solid #46515b;
+    color: white;
+    padding: 12px 18px;
+    border-radius: 12px;
+    opacity: 0;
+    pointer-events: none;
+    transition: .25s;
+    z-index: 2000;
+}
+
+.toast.show {
+    opacity: 1;
+}
+
+/* CFG Download */
+
+.settings-btn {
+    position: fixed;
+    right: 24px;
+    bottom: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    padding: 16px 22px;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    color: white;
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: .2s ease;
+    z-index: 1000;
+    box-shadow: 0 5px 20px rgba(0,0,0,.15);
+}
+
+.settings-btn:hover {
+    transform: translateY(-3px);
+    background: var(--card-hover);
+    border-color: var(--accent);
+}
+
+.settings-btn img {
+    width: 24px;
+    height: 24px;
+    object-fit: contain;
+}
+
+/* Mobile */
+
+@media (max-width: 600px) {
+    .avatar {
+        width: 130px;
+        height: 130px;
+    }
+
+    h1 {
+        font-size: 1.8rem;
+    }
+
+    .stats-section {
+        padding: 16px;
+    }
+
+    .stat-card {
+        padding: 12px;
+    }
+
+    .stat-value {
+        font-size: 22px;
+    }
+
+    .leetify-logo-card img {
+        max-width: 135px;
+    }
+
+    .settings-btn {
+        right: 15px;
+        bottom: 20px;
+        padding: 12px 16px;
+        font-size: 12px;
+        gap: 8px;
+    }
+
+    .settings-btn img {
+        width: 20px;
+        height: 20px;
+    }
+
+    .steam-modal {
+        padding: 20px;
+    }
+
+    .refresh-btn {
+        font-size: 11px;
+        padding: 8px 10px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <!-- Profile -->
+
+    <div class="profile">
+        <img src="dust.gif" alt="kwersi" class="avatar">
+        <h1>kwersi</h1>
+        <div class="username">@kwersi</div>
+    </div>
+
+    <!-- Social Links -->
+
+    <div class="links">
+
+        <a
+            class="link"
+            href="https://x.com/kwersi"
+            target="_blank"
+            rel="noopener noreferrer">
+            <img src="icons/x.svg" alt="X" class="icon">
+            <div class="link-title">twitter</div>
+        </a>
+
+        <button
+            class="link"
+            type="button"
+            onclick="openSteamPopup()">
+            <img src="icons/steam.svg" alt="Steam" class="icon">
+            <div class="link-title">steam</div>
+        </button>
+
+        <a
+            class="link"
+            href="https://www.faceit.com/en/players/kwersi"
+            target="_blank"
+            rel="noopener noreferrer">
+            <img src="icons/faceit.svg" alt="Faceit" class="icon">
+            <div class="link-title">faceit</div>
+        </a>
+
+        <button
+            class="link"
+            type="button"
+            onclick="copyDiscord()">
+            <img src="icons/discord.svg" alt="Discord" class="icon">
+            <div class="link-title">discord • @kwersi</div>
+        </button>
+
+    </div>
+
+    <!-- Leetify Stats -->
+
+    <section class="stats-section">
+
+        <div class="stats-header">
+
+            <h2>
+                <a
+                    class="leetify-heading"
+                    href="https://leetify.com/app/profile/76561198354031646"
+                    target="_blank"
+                    rel="noopener noreferrer">
+                    View on Leetify
+                </a>
+            </h2>
+
+            <button
+                class="refresh-btn"
+                id="refreshStats"
+                type="button"
+                onclick="loadLeetifyStats(true)"
+                title="Refresh Leetify statistics">
+
+                <span class="refresh-icon" aria-hidden="true">↻</span>
+                <span id="refreshText">Refresh Stats</span>
+
+            </button>
+
+        </div>
+
+        <!-- Stats Grid -->
+
+        <div class="stats-grid">
+
+            <div class="stat-card">
+                <div class="stat-label">Leetify Rating</div>
+                <div class="stat-value pink" id="leetifyRating">—</div>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-label">Premier Rating</div>
+                <div class="stat-value blue" id="premierRating">—</div>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-label">Aim</div>
+                <div class="stat-value purple" id="aimRating">—</div>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-label">Positioning</div>
+                <div class="stat-value green" id="positioningRating">—</div>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-label">Utility</div>
+                <div class="stat-value blue" id="utilityRating">—</div>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-label">Win Rate</div>
+                <div class="stat-value green" id="winRate">—</div>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-label">Tracked Matches</div>
+                <div class="stat-value" id="totalMatches">—</div>
+            </div>
+
+            <a
+                class="stat-card leetify-logo-card"
+                href="https://leetify.com/"
+                target="_blank"
+                rel="noopener noreferrer">
+                <img
+                    src="icons/leetify-attribution.png"
+                    alt="Data Provided by Leetify">
+            </a>
+
+        </div>
+
+        <p class="stats-error" id="statsError" role="alert"></p>
+
+    </section>
+
+</div>
+
+<!-- Steam Account Popup -->
+
+<div
+    class="steam-overlay"
+    id="steamOverlay"
+    aria-hidden="true"
+    onclick="closeSteamPopup(event)">
+
+    <div
+        class="steam-modal"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="steamModalTitle">
+
+        <div class="steam-modal-header">
+
+            <div class="steam-modal-title">
+                <img src="icons/steam.svg" alt="">
+                <h2 id="steamModalTitle">Steam Accounts</h2>
+            </div>
+
+            <button
+                class="steam-close"
+                type="button"
+                aria-label="Close popup"
+                onclick="closeSteamPopup()">
+                &times;
+            </button>
+
+        </div>
+
+        <div class="steam-accounts">
+
+            <a
+                class="steam-account"
+                href="https://steamcommunity.com/profiles/76561198354031646"
+                target="_blank"
+                rel="noopener noreferrer">
+
+                <div class="steam-account-icon">M</div>
+
+                <div class="steam-account-info">
+                    <div class="steam-account-name">Main</div>
+                </div>
+
+                <span class="steam-account-arrow">↗</span>
+
+            </a>
+
+            <a
+                class="steam-account alt"
+                href="https://steamcommunity.com/profiles/76561199041184194/"
+                target="_blank"
+                rel="noopener noreferrer">
+
+                <div class="steam-account-icon">A</div>
+
+                <div class="steam-account-info">
+                    <div class="steam-account-name">Alt</div>
+                </div>
+
+                <span class="steam-account-arrow">↗</span>
+
+            </a>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- CFG Download -->
+
+<a
+    href="settings/730.zip"
+    download
+    class="settings-btn"
+    title="Download CS2 Settings">
+
+    <img src="icons/cog.svg" alt="Settings">
+    <span>Download CFG</span>
+
+</a>
+
+<!-- Discord Notification -->
+
+<div id="toast" class="toast" role="status">
+    Copied Discord username: @kwersi
+</div>
+
+<script>
+
+/* Steam Popup */
+
+let steamPreviousFocus = null;
+
+function openSteamPopup() {
+    const overlay = document.getElementById("steamOverlay");
+
+    steamPreviousFocus = document.activeElement;
+    overlay.classList.add("show");
+    overlay.setAttribute("aria-hidden", "false");
+    document.body.style.overflow = "hidden";
+
+    overlay.querySelector(".steam-close").focus();
+}
+
+function closeSteamPopup(event) {
+    const overlay = document.getElementById("steamOverlay");
+
+    if (event && event.target !== overlay) return;
+
+    overlay.classList.remove("show");
+    overlay.setAttribute("aria-hidden", "true");
+    document.body.style.overflow = "";
+
+    if (steamPreviousFocus) {
+        steamPreviousFocus.focus();
+    }
+}
+
+document.addEventListener("keydown", function(event) {
+    const overlay = document.getElementById("steamOverlay");
+
+    if (!overlay.classList.contains("show")) return;
+
+    if (event.key === "Escape") {
+        closeSteamPopup();
+        return;
+    }
+
+    if (event.key === "Tab") {
+        const elements = Array.from(
+            overlay.querySelectorAll("button, a[href]")
+        );
+
+        const first = elements[0];
+        const last = elements[elements.length - 1];
+
+        if (event.shiftKey && document.activeElement === first) {
+            event.preventDefault();
+            last.focus();
+        } else if (!event.shiftKey && document.activeElement === last) {
+            event.preventDefault();
+            first.focus();
+        }
+    }
+});
+
+/* Discord Copy */
+
+let toastTimeout;
+
+function copyDiscord() {
+    navigator.clipboard.writeText("@kwersi")
+        .then(() => {
+            const toast = document.getElementById("toast");
+
+            toast.classList.add("show");
+            clearTimeout(toastTimeout);
+
+            toastTimeout = setTimeout(() => {
+                toast.classList.remove("show");
+            }, 2000);
+        })
+        .catch(() => {
+            alert("Discord username: @kwersi");
+        });
+}
+
+/* Leetify API */
+
+const STEAM_ID = "76561198354031646";
+
+const LEETIFY_API =
+    "https://api-public.cs-prod.leetify.com/v3/profile" +
+    "?steam64_id=" + STEAM_ID;
+
+let statsLoading = false;
+let lastUpdated = null;
+let showUpdateTimer = false;
+
+/* Refresh Timer */
+
+function updateRefreshText() {
+    const text = document.getElementById("refreshText");
+
+    if (!showUpdateTimer || lastUpdated === null) {
+        text.textContent = "Refresh Stats";
+        return;
+    }
+
+    const elapsed = Math.max(
+        0,
+        Math.floor((Date.now() - lastUpdated) / 1000)
+    );
+
+    if (elapsed < 60) {
+        text.textContent =
+            "Updated " + elapsed +
+            (elapsed === 1 ? " second ago" : " seconds ago");
+    } else if (elapsed < 3600) {
+        const minutes = Math.floor(elapsed / 60);
+
+        text.textContent =
+            "Updated " + minutes +
+            (minutes === 1 ? " minute ago" : " minutes ago");
+    } else if (elapsed < 86400) {
+        const hours = Math.floor(elapsed / 3600);
+
+        text.textContent =
+            "Updated " + hours +
+            (hours === 1 ? " hour ago" : " hours ago");
+    } else {
+        const days = Math.floor(elapsed / 86400);
+
+        text.textContent =
+            "Updated " + days +
+            (days === 1 ? " day ago" : " days ago");
+    }
+}
+
+/* Numeric Helpers */
+
+function setStat(id, value) {
+    document.getElementById(id).textContent =
+        value === null || value === undefined || value === ""
+            ? "—"
+            : String(value);
+}
+
+function numberOrNull(value) {
+    if (value === null || value === undefined || value === "") {
+        return null;
+    }
+
+    const number = Number(value);
+    return Number.isFinite(number) ? number : null;
+}
+
+function firstNumber(...values) {
+    for (const value of values) {
+        const number = numberOrNull(value);
+
+        if (number !== null) return number;
+    }
+
+    return null;
+}
+
+function formatRating(value, decimals = 1) {
+    const number = numberOrNull(value);
+
+    return number === null
+        ? "—"
+        : number.toFixed(decimals);
+}
+
+function formatInteger(value) {
+    const number = numberOrNull(value);
+
+    return number === null
+        ? "—"
+        : Math.round(number).toLocaleString("en-US");
+}
+
+/* Fetch Leetify Statistics */
+
+async function loadLeetifyStats(manualRefresh = false) {
+    if (statsLoading) return;
+
+    statsLoading = true;
+
+    const errorMessage = document.getElementById("statsError");
+    const button = document.getElementById("refreshStats");
+    const refreshText = document.getElementById("refreshText");
+
+    button.disabled = true;
+    errorMessage.textContent = "";
+
+    if (manualRefresh) {
+        refreshText.textContent = "Refreshing...";
+    }
+
+    try {
+        const response = await fetch(LEETIFY_API, {
+            method: "GET",
+            headers: {
+                "Accept": "application/json"
+            },
+            cache: "no-store"
+        });
+
+        if (!response.ok) {
+            throw new Error(
+                "Leetify returned HTTP " + response.status
+            );
+        }
+
+        const data = await response.json();
+
+        if (!data || typeof data !== "object") {
+            throw new Error("Invalid API response");
+        }
+
+        const rating = data.rating || {};
+        const ranks = data.ranks || {};
+
+        const overall = firstNumber(
+            ranks.leetify,
+            rating.leetify,
+            rating.leetify_rating,
+            rating.overall
+        );
+
+        const aim = firstNumber(
+            rating.aim,
+            rating.aim_rating
+        );
+
+        const positioning = firstNumber(
+            rating.positioning,
+            rating.positioning_rating
+        );
+
+        const utility = firstNumber(
+            rating.utility,
+            rating.utility_rating
+        );
+
+        const premier = firstNumber(
+            ranks.premier,
+            ranks.premier_rating
+        );
+
+        const winrate = numberOrNull(data.winrate);
+
+        setStat(
+            "leetifyRating",
+            overall === null
+                ? null
+                : (overall > 0 ? "+" : "") +
+                  formatRating(overall, 2)
+        );
+
+        setStat("premierRating", formatInteger(premier));
+        setStat("aimRating", formatRating(aim));
+        setStat("positioningRating", formatRating(positioning));
+        setStat("utilityRating", formatRating(utility));
+
+        setStat(
+            "winRate",
+            winrate === null
+                ? null
+                : (winrate * 100).toFixed(1) + "%"
+        );
+
+        setStat(
+            "totalMatches",
+            formatInteger(data.total_matches)
+        );
+
+        const available = [
+            overall,
+            premier,
+            aim,
+            positioning,
+            utility,
+            winrate,
+            data.total_matches
+        ].some(value => numberOrNull(value) !== null);
+
+        if (!available) {
+            throw new Error("No supported statistics found");
+        }
+
+        if (manualRefresh) {
+            lastUpdated = Date.now();
+            showUpdateTimer = true;
+            updateRefreshText();
+        }
+
+    } catch (error) {
+        console.error("Leetify API error:", error);
+
+        errorMessage.textContent =
+            "Unable to refresh Leetify statistics. Please try again later.";
+
+        updateRefreshText();
+
+    } finally {
+        statsLoading = false;
+        button.disabled = false;
+    }
+}
+
+/* Update Timer */
+
+setInterval(() => {
+    if (!statsLoading) {
+        updateRefreshText();
+    }
+}, 1000);
+
+/* Initial Stats Load */
+
+loadLeetifyStats(false);
+
+</script>
+
+</body>
+</html>
