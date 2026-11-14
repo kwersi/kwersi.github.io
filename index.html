@@ -10,9 +10,6 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
 <style>
-
-/* General Reset */
-
 * {
     margin: 0;
     padding: 0;
@@ -26,9 +23,8 @@
     --border: #253142;
     --text: #ffffff;
     --muted: #93a2b7;
+    --accent: #5865f2;
 }
-
-/* Body */
 
 body {
     font-family: 'Inter', sans-serif;
@@ -38,57 +34,38 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 24px;
+    padding: 55px 24px 115px;
     position: relative;
     overflow-x: hidden;
 }
-
-/* Animated Background Glow */
 
 body::before {
     content: "";
     position: fixed;
     inset: 0;
     background:
-        radial-gradient(
-            circle at top center,
-            rgba(88,101,242,.15),
-            transparent 40%
-        ),
-        radial-gradient(
-            circle at bottom right,
-            rgba(124,58,237,.10),
-            transparent 35%
-        ),
-        radial-gradient(
-            circle at bottom left,
-            rgba(59,130,246,.08),
-            transparent 30%
-        );
-
+        radial-gradient(circle at top center,
+            rgba(88,101,242,.15), transparent 40%),
+        radial-gradient(circle at bottom right,
+            rgba(124,58,237,.10), transparent 35%),
+        radial-gradient(circle at bottom left,
+            rgba(59,130,246,.08), transparent 30%);
     pointer-events: none;
     z-index: -1;
-
     animation: glow 12s ease-in-out infinite alternate;
 }
 
 @keyframes glow {
-    from {
-        transform: scale(1);
-    }
-    to {
-        transform: scale(1.1);
-    }
+    from { transform: scale(1); }
+    to { transform: scale(1.1); }
 }
 
-/* Main Container */
+/* Profile */
 
 .container {
     width: 100%;
     max-width: 560px;
 }
-
-/* Profile */
 
 .profile {
     text-align: center;
@@ -103,7 +80,6 @@ body::before {
     border-radius: 50%;
     object-fit: cover;
     border: 3px solid var(--border);
-
     box-shadow:
         0 0 40px rgba(88,101,242,.20),
         0 0 100px rgba(124,58,237,.10);
@@ -132,16 +108,12 @@ h1 {
     background: var(--card);
     border: 1px solid var(--border);
     border-radius: 18px;
-
     padding: 18px 22px;
-
     display: flex;
     align-items: center;
     gap: 16px;
-
     color: white;
     text-decoration: none;
-
     transition: .2s ease;
 }
 
@@ -163,10 +135,139 @@ h1 {
     font-weight: 600;
 }
 
-/* Discord */
-
 .discord-card {
     cursor: pointer;
+}
+
+/* Leetify Stats */
+
+.stats-section {
+    margin-top: 32px;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    padding: 22px;
+}
+
+.stats-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 20px;
+}
+
+.stats-header h2 {
+    font-size: 17px;
+    font-weight: 700;
+}
+
+.stats-status {
+    color: var(--muted);
+    font-size: 12px;
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+}
+
+.stat-card {
+    background: #0b0f14;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 16px;
+    min-width: 0;
+}
+
+.stat-label {
+    color: var(--muted);
+    font-size: 12px;
+    margin-bottom: 9px;
+}
+
+.stat-value {
+    font-size: 26px;
+    font-weight: 800;
+    overflow-wrap: anywhere;
+}
+
+.stat-value.pink {
+    color: #f84982;
+}
+
+.stat-value.blue {
+    color: #60a5fa;
+}
+
+.stat-value.purple {
+    color: #a78bfa;
+}
+
+.stat-value.green {
+    color: #34d399;
+}
+
+.stats-message {
+    margin-top: 16px;
+    font-size: 12px;
+    line-height: 1.6;
+    color: var(--muted);
+}
+
+.stats-footer {
+    margin-top: 18px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.stats-footer a {
+    color: #f84982;
+    font-size: 12px;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.stats-footer a:hover {
+    text-decoration: underline;
+}
+
+.refresh-btn {
+    background: #1b2430;
+    color: white;
+    border: 1px solid #334155;
+    padding: 9px 13px;
+    border-radius: 9px;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 12px;
+    transition: .2s;
+}
+
+.refresh-btn:hover {
+    background: #263548;
+}
+
+.refresh-btn:disabled {
+    opacity: .5;
+    cursor: wait;
+}
+
+.leetify-credit {
+    display: block;
+    margin-top: 15px;
+    color: var(--muted);
+    font-size: 11px;
+    text-align: center;
+}
+
+.leetify-credit img {
+    max-width: 170px;
+    height: auto;
 }
 
 /* Discord Notification */
@@ -176,18 +277,14 @@ h1 {
     left: 50%;
     bottom: 90px;
     transform: translateX(-50%);
-
     background: #1b2430;
     border: 1px solid #334155;
     color: white;
-
     padding: 12px 18px;
     border-radius: 12px;
-
     opacity: 0;
     pointer-events: none;
     transition: .25s;
-
     z-index: 2000;
 }
 
@@ -195,35 +292,28 @@ h1 {
     opacity: 1;
 }
 
-/* CS2 Settings Download Button */
+/* CFG Download */
 
 .settings-btn {
     position: fixed;
     right: 24px;
     bottom: 24px;
-
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 12px;
-
     padding: 16px 22px;
-
     background: #121821;
     border: 1px solid #253142;
     border-radius: 16px;
-
     color: white;
     font-family: 'Inter', sans-serif;
     font-size: 14px;
     font-weight: 600;
     text-decoration: none;
-
     transition: .2s ease;
     z-index: 1000;
-
-    box-shadow:
-        0 0 20px rgba(88,101,242,.12);
+    box-shadow: 0 0 20px rgba(88,101,242,.12);
 }
 
 .settings-btn:hover {
@@ -238,10 +328,9 @@ h1 {
     object-fit: contain;
 }
 
-/* Mobile Responsiveness */
+/* Mobile */
 
 @media (max-width: 600px) {
-
     .avatar {
         width: 130px;
         height: 130px;
@@ -249,6 +338,18 @@ h1 {
 
     h1 {
         font-size: 1.8rem;
+    }
+
+    .stats-section {
+        padding: 16px;
+    }
+
+    .stat-card {
+        padding: 12px;
+    }
+
+    .stat-value {
+        font-size: 22px;
     }
 
     .settings-btn {
@@ -263,38 +364,29 @@ h1 {
         width: 20px;
         height: 20px;
     }
-
 }
-
 </style>
 </head>
 
 <body>
 
-<!-- Main Profile -->
-
 <div class="container">
 
-    <div class="profile">
+    <!-- Profile -->
 
+    <div class="profile">
         <img
             src="dust.gif"
             alt="kwersi"
             class="avatar">
 
         <h1>kwersi</h1>
-
-        <div class="username">
-            @kwersi
-        </div>
-
+        <div class="username">@kwersi</div>
     </div>
 
     <!-- Social Links -->
 
     <div class="links">
-
-        <!-- Twitter -->
 
         <a
             class="link"
@@ -302,18 +394,9 @@ h1 {
             target="_blank"
             rel="noopener noreferrer">
 
-            <img
-                src="icons/x.svg"
-                alt="X"
-                class="icon">
-
-            <div class="link-title">
-                twitter
-            </div>
-
+            <img src="icons/x.svg" alt="X" class="icon">
+            <div class="link-title">twitter</div>
         </a>
-
-        <!-- Steam -->
 
         <a
             class="link"
@@ -321,18 +404,9 @@ h1 {
             target="_blank"
             rel="noopener noreferrer">
 
-            <img
-                src="icons/steam.svg"
-                alt="Steam"
-                class="icon">
-
-            <div class="link-title">
-                steam
-            </div>
-
+            <img src="icons/steam.svg" alt="Steam" class="icon">
+            <div class="link-title">steam</div>
         </a>
-
-        <!-- Faceit -->
 
         <a
             class="link"
@@ -340,39 +414,110 @@ h1 {
             target="_blank"
             rel="noopener noreferrer">
 
-            <img
-                src="icons/faceit.svg"
-                alt="Faceit"
-                class="icon">
-
-            <div class="link-title">
-                faceit
-            </div>
-
+            <img src="icons/faceit.svg" alt="Faceit" class="icon">
+            <div class="link-title">faceit</div>
         </a>
-
-        <!-- Discord -->
 
         <div
             class="link discord-card"
-            onclick="copyDiscord()">
+            role="button"
+            tabindex="0"
+            onclick="copyDiscord()"
+            onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();copyDiscord();}">
 
-            <img
-                src="icons/discord.svg"
-                alt="Discord"
-                class="icon">
-
-            <div class="link-title">
-                discord • @kwersi
-            </div>
-
+            <img src="icons/discord.svg" alt="Discord" class="icon">
+            <div class="link-title">discord • @kwersi</div>
         </div>
 
     </div>
 
+    <!-- Leetify Stats -->
+
+    <section class="stats-section">
+
+        <div class="stats-header">
+            <h2>🎯 CS2 Stats</h2>
+            <span class="stats-status" id="statsStatus">
+                Loading...
+            </span>
+        </div>
+
+        <div class="stats-grid">
+
+            <div class="stat-card">
+                <div class="stat-label">Leetify Rating</div>
+                <div class="stat-value pink" id="leetifyRating">—</div>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-label">Premier Rating</div>
+                <div class="stat-value blue" id="premierRating">—</div>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-label">Aim</div>
+                <div class="stat-value purple" id="aimRating">—</div>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-label">Positioning</div>
+                <div class="stat-value green" id="positioningRating">—</div>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-label">Utility</div>
+                <div class="stat-value blue" id="utilityRating">—</div>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-label">Win Rate</div>
+                <div class="stat-value green" id="winRate">—</div>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-label">Tracked Matches</div>
+                <div class="stat-value" id="totalMatches">—</div>
+            </div>
+
+        </div>
+
+        <p class="stats-message" id="statsMessage" role="status">
+            Fetching live statistics from Leetify...
+        </p>
+
+        <div class="stats-footer">
+            <a
+                href="https://leetify.com/app/profile/76561198354031646"
+                target="_blank"
+                rel="noopener noreferrer">
+                View on Leetify
+            </a>
+
+            <button
+                class="refresh-btn"
+                id="refreshStats"
+                onclick="loadLeetifyStats()">
+                ↻ Refresh Stats
+            </button>
+        </div>
+
+        <!-- Add Leetify's official attribution logo here -->
+        <a
+            class="leetify-credit"
+            href="https://leetify.com/"
+            target="_blank"
+            rel="noopener noreferrer">
+            <img
+                src="icons/leetify-attribution.png"
+                alt="Data Provided by Leetify"
+                onerror="this.style.display='none'; this.parentElement.append('Data Provided by Leetify');">
+        </a>
+
+    </section>
+
 </div>
 
-<!-- CS2 Settings Download -->
+<!-- CFG Download -->
 
 <a
     href="settings/730.zip"
@@ -380,31 +525,25 @@ h1 {
     class="settings-btn"
     title="Download CS2 Settings">
 
-    <img
-        src="icons/cog.svg"
-        alt="Settings">
-
+    <img src="icons/cog.svg" alt="Settings">
     <span>Download CFG</span>
-
 </a>
 
-<!-- Discord Notification -->
+<!-- Discord Toast -->
 
 <div id="toast" class="toast" role="status">
     Copied Discord username: @kwersi
 </div>
 
-<!-- JavaScript -->
-
 <script>
+
+/* Discord Copy */
 
 let toastTimeout;
 
 function copyDiscord() {
-
     navigator.clipboard.writeText("@kwersi")
         .then(() => {
-
             const toast = document.getElementById("toast");
 
             toast.classList.add("show");
@@ -414,13 +553,189 @@ function copyDiscord() {
             toastTimeout = setTimeout(() => {
                 toast.classList.remove("show");
             }, 2000);
-
         })
         .catch(() => {
             alert("Discord username: @kwersi");
         });
-
 }
+
+/* Leetify API */
+
+const STEAM_ID = "76561198354031646";
+
+const LEETIFY_API =
+    "https://api-public.cs-prod.leetify.com/v3/profile" +
+    "?steam64_id=" + STEAM_ID;
+
+let statsLoading = false;
+
+function setStat(id, value) {
+    document.getElementById(id).textContent =
+        value === null || value === undefined ||
+        value === "" ? "—" : String(value);
+}
+
+function numberOrNull(value) {
+    if (value === null || value === undefined || value === "") {
+        return null;
+    }
+
+    const number = Number(value);
+    return Number.isFinite(number) ? number : null;
+}
+
+function firstNumber(...values) {
+    for (const value of values) {
+        const number = numberOrNull(value);
+        if (number !== null) return number;
+    }
+    return null;
+}
+
+function formatRating(value, decimals = 1) {
+    const number = numberOrNull(value);
+    return number === null ? "—" : number.toFixed(decimals);
+}
+
+function formatInteger(value) {
+    const number = numberOrNull(value);
+    return number === null
+        ? "—"
+        : Math.round(number).toLocaleString("en-US");
+}
+
+async function loadLeetifyStats() {
+    if (statsLoading) return;
+
+    statsLoading = true;
+
+    const status = document.getElementById("statsStatus");
+    const message = document.getElementById("statsMessage");
+    const button = document.getElementById("refreshStats");
+
+    button.disabled = true;
+    status.textContent = "Loading...";
+    message.textContent = "Fetching live statistics from Leetify...";
+
+    const fields = [
+        "leetifyRating",
+        "premierRating",
+        "aimRating",
+        "positioningRating",
+        "utilityRating",
+        "winRate",
+        "totalMatches"
+    ];
+
+    fields.forEach(id => setStat(id, null));
+
+    try {
+        const response = await fetch(LEETIFY_API, {
+            method: "GET",
+            headers: {
+                "Accept": "application/json"
+            },
+            cache: "no-store"
+        });
+
+        if (!response.ok) {
+            throw new Error("Leetify returned HTTP " + response.status);
+        }
+
+        const data = await response.json();
+
+        if (!data || typeof data !== "object") {
+            throw new Error("Invalid API response");
+        }
+
+        const rating = data.rating || {};
+        const ranks = data.ranks || {};
+
+        // Leetify skill ratings
+        const overall = firstNumber(
+            rating.leetify,
+            rating.leetify_rating,
+            rating.overall
+        );
+
+        const aim = firstNumber(
+            rating.aim,
+            rating.aim_rating
+        );
+
+        const positioning = firstNumber(
+            rating.positioning,
+            rating.positioning_rating
+        );
+
+        const utility = firstNumber(
+            rating.utility,
+            rating.utility_rating
+        );
+
+        // Premier rank
+        const premier = firstNumber(
+            ranks.premier,
+            ranks.premier_rating
+        );
+
+        // Win rate: Leetify returns a fraction from 0 to 1
+        const winrate = numberOrNull(data.winrate);
+
+        setStat(
+            "leetifyRating",
+            overall === null
+                ? null
+                : (overall > 0 ? "+" : "") + formatRating(overall, 2)
+        );
+
+        setStat("premierRating", formatInteger(premier));
+        setStat("aimRating", formatRating(aim));
+        setStat("positioningRating", formatRating(positioning));
+        setStat("utilityRating", formatRating(utility));
+
+        setStat(
+            "winRate",
+            winrate === null
+                ? null
+                : (winrate * 100).toFixed(1) + "%"
+        );
+
+        setStat("totalMatches", formatInteger(data.total_matches));
+
+        const available = [
+            overall, premier, aim, positioning,
+            utility, winrate, data.total_matches
+        ].some(value => numberOrNull(value) !== null);
+
+        if (!available) {
+            status.textContent = "No data";
+            message.textContent =
+                "Leetify returned a profile, but no supported statistics were available.";
+        } else {
+            status.textContent = "Updated";
+            message.textContent =
+                "Live data from Leetify. Refresh to check for newer stats.";
+        }
+
+    } catch (error) {
+        console.error("Leetify API error:", error);
+
+        status.textContent = "Unavailable";
+
+        message.textContent =
+            "Unable to load Leetify stats. The API may be " +
+            "rate-limited, the profile may be unavailable, " +
+            "or your browser may be blocking the request (CORS).";
+    } finally {
+        statsLoading = false;
+        button.disabled = false;
+    }
+}
+
+/* Load stats when the page opens */
+
+loadLeetifyStats();
 
 </script>
 
