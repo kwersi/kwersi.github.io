@@ -299,6 +299,21 @@ h1 {
     font-weight: 700;
 }
 
+/* Clickable Leetify Heading */
+
+.leetify-heading {
+    color: white;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color .2s ease;
+}
+
+.leetify-heading:hover {
+    color: #f84982;
+}
+
 .stats-status {
     color: var(--muted);
     font-size: 12px;
@@ -593,10 +608,27 @@ h1 {
     <section class="stats-section">
 
         <div class="stats-header">
-            <h2>🎯 CS2 Stats</h2>
+
+            <!-- Clickable Leetify Heading -->
+
+            <h2>
+                <a
+                    class="leetify-heading"
+                    href="https://leetify.com/app/profile/76561198354031646"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    title="View my Leetify profile">
+
+                    
+                    <span>leetify</span>
+
+                </a>
+            </h2>
+
             <span class="stats-status" id="statsStatus">
                 Loading...
             </span>
+
         </div>
 
         <div class="stats-grid">
@@ -636,7 +668,7 @@ h1 {
                 <div class="stat-value" id="totalMatches">—</div>
             </div>
 
-            <!-- Leetify Logo -->
+            <!-- Leetify Attribution -->
 
             <a
                 class="stat-card leetify-logo-card"
