@@ -202,16 +202,22 @@ h1 {
     right: 24px;
     bottom: 24px;
 
-    width: 60px;
-    height: 60px;
-
     display: flex;
     align-items: center;
     justify-content: center;
+    gap: 12px;
+
+    padding: 16px 22px;
 
     background: #121821;
     border: 1px solid #253142;
-    border-radius: 50%;
+    border-radius: 16px;
+
+    color: white;
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    text-decoration: none;
 
     transition: .2s ease;
     z-index: 1000;
@@ -221,7 +227,7 @@ h1 {
 }
 
 .settings-btn:hover {
-    transform: rotate(25deg);
+    transform: translateY(-3px);
     background: #18212d;
     border-color: #5865f2;
 }
@@ -248,6 +254,14 @@ h1 {
     .settings-btn {
         right: 15px;
         bottom: 20px;
+        padding: 12px 16px;
+        font-size: 12px;
+        gap: 8px;
+    }
+
+    .settings-btn img {
+        width: 20px;
+        height: 20px;
     }
 
 }
@@ -369,6 +383,8 @@ h1 {
     <img
         src="icons/cog.svg"
         alt="Settings">
+
+    <span>Download CFG</span>
 
 </a>
 
