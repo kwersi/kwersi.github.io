@@ -10,6 +10,9 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
 <style>
+
+/* General Reset */
+
 * {
     margin: 0;
     padding: 0;
@@ -24,6 +27,8 @@
     --text: #ffffff;
     --muted: #93a2b7;
 }
+
+/* Body */
 
 body {
     font-family: 'Inter', sans-serif;
@@ -60,8 +65,10 @@ body::before {
             rgba(59,130,246,.08),
             transparent 30%
         );
+
     pointer-events: none;
     z-index: -1;
+
     animation: glow 12s ease-in-out infinite alternate;
 }
 
@@ -96,6 +103,7 @@ body::before {
     border-radius: 50%;
     object-fit: cover;
     border: 3px solid var(--border);
+
     box-shadow:
         0 0 40px rgba(88,101,242,.20),
         0 0 100px rgba(124,58,237,.10);
@@ -124,12 +132,16 @@ h1 {
     background: var(--card);
     border: 1px solid var(--border);
     border-radius: 18px;
+
     padding: 18px 22px;
+
     display: flex;
     align-items: center;
     gap: 16px;
+
     color: white;
     text-decoration: none;
+
     transition: .2s ease;
 }
 
@@ -151,25 +163,31 @@ h1 {
     font-weight: 600;
 }
 
+/* Discord */
+
 .discord-card {
     cursor: pointer;
 }
 
-/* Discord Toast */
+/* Discord Notification */
 
 .toast {
     position: fixed;
     left: 50%;
     bottom: 90px;
     transform: translateX(-50%);
+
     background: #1b2430;
     border: 1px solid #334155;
     color: white;
+
     padding: 12px 18px;
     border-radius: 12px;
+
     opacity: 0;
     pointer-events: none;
     transition: .25s;
+
     z-index: 2000;
 }
 
@@ -177,22 +195,27 @@ h1 {
     opacity: 1;
 }
 
-/* CS2 Settings Button */
+/* CS2 Settings Download Button */
 
 .settings-btn {
     position: fixed;
     right: 24px;
     bottom: 24px;
+
     width: 60px;
     height: 60px;
+
     display: flex;
     align-items: center;
     justify-content: center;
+
     background: #121821;
     border: 1px solid #253142;
     border-radius: 50%;
+
     transition: .2s ease;
     z-index: 1000;
+
     box-shadow:
         0 0 20px rgba(88,101,242,.12);
 }
@@ -209,58 +232,10 @@ h1 {
     object-fit: contain;
 }
 
-/* Always Visible YouTube Player */
-
-.music-popup {
-    position: fixed;
-    bottom: 24px;
-    left: 24px;
-    width: min(360px, calc(100vw - 48px));
-    padding: 14px;
-    background: #121821;
-    border: 1px solid #253142;
-    border-radius: 18px;
-    box-shadow: 0 15px 50px rgba(0,0,0,.6);
-    z-index: 1002;
-}
-
-.music-header {
-    display: flex;
-    align-items: center;
-    margin-bottom: 12px;
-}
-
-.music-header h3 {
-    font-size: 15px;
-    font-weight: 700;
-    color: white;
-}
-
-.music-popup p {
-    color: #93a2b7;
-    font-size: 13px;
-    margin-bottom: 12px;
-}
-
-.video-container {
-    width: 100%;
-    aspect-ratio: 16 / 9;
-    border-radius: 10px;
-    overflow: hidden;
-    background: #000;
-}
-
-.video-container video {
-    display: block;
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-    background: #000;
-}
-
 /* Mobile Responsiveness */
 
 @media (max-width: 600px) {
+
     .avatar {
         width: 130px;
         height: 130px;
@@ -270,21 +245,13 @@ h1 {
         font-size: 1.8rem;
     }
 
-    .music-popup {
-        left: 15px;
-        bottom: 15px;
-        width: min(300px, calc(100vw - 30px));
-    }
-
     .settings-btn {
         right: 15px;
         bottom: 20px;
     }
 
-    .container {
-        padding-bottom: 280px;
-    }
 }
+
 </style>
 </head>
 
@@ -411,36 +378,6 @@ h1 {
     Copied Discord username: @kwersi
 </div>
 
-<!-- Always Visible YouTube Player -->
-
-<div class="music-popup">
-
-    <div class="music-header">
-        <h3>♫ Now Playing</h3>
-    </div>
-
-    <p>Paradisio</p>
-
-
-    <div class="video-container">
-    
-        <video
-            controls
-            preload="metadata"
-            playsinline
-            style="width:100%; height:100%;">
-    
-            <source src="./paradisio.mp4" type="video/mp4">
-    
-            Your browser does not support HTML5 video.
-    
-        </video>
-    
-    </div>
-
-
-</div>
-
 <!-- JavaScript -->
 
 <script>
@@ -448,8 +385,10 @@ h1 {
 let toastTimeout;
 
 function copyDiscord() {
+
     navigator.clipboard.writeText("@kwersi")
         .then(() => {
+
             const toast = document.getElementById("toast");
 
             toast.classList.add("show");
@@ -459,10 +398,12 @@ function copyDiscord() {
             toastTimeout = setTimeout(() => {
                 toast.classList.remove("show");
             }, 2000);
+
         })
         .catch(() => {
             alert("Discord username: @kwersi");
         });
+
 }
 
 </script>
