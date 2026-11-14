@@ -23,7 +23,6 @@
     --border: #253142;
     --text: #ffffff;
     --muted: #93a2b7;
-    --accent: #5865f2;
 }
 
 body {
@@ -145,7 +144,7 @@ h1 {
 .steam-overlay {
     position: fixed;
     inset: 0;
-    background: rgba(0, 0, 0, .75);
+    background: rgba(0,0,0,.75);
     backdrop-filter: blur(7px);
     -webkit-backdrop-filter: blur(7px);
     display: flex;
@@ -299,14 +298,9 @@ h1 {
     font-weight: 700;
 }
 
-/* Clickable Leetify Heading */
-
 .leetify-heading {
     color: white;
     text-decoration: none;
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
     transition: color .2s ease;
 }
 
@@ -314,10 +308,46 @@ h1 {
     color: #f84982;
 }
 
+/* Refresh Controls */
+
+.stats-controls {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 5px;
+}
+
+.refresh-btn {
+    background: #1b2430;
+    color: white;
+    border: 1px solid #334155;
+    padding: 9px 13px;
+    border-radius: 9px;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 12px;
+    font-weight: 600;
+    white-space: nowrap;
+    transition: .2s;
+}
+
+.refresh-btn:hover {
+    background: #263548;
+    border-color: #5865f2;
+}
+
+.refresh-btn:disabled {
+    opacity: .5;
+    cursor: wait;
+}
+
 .stats-status {
     color: var(--muted);
-    font-size: 12px;
+    font-size: 11px;
+    white-space: nowrap;
 }
+
+/* Stat Cards */
 
 .stats-grid {
     display: grid;
@@ -385,54 +415,17 @@ h1 {
     transform: translateY(-2px);
 }
 
-/* Stats Footer */
+/* API Error Message */
 
-.stats-message {
-    margin-top: 16px;
+.stats-error {
+    margin-top: 14px;
     font-size: 12px;
     line-height: 1.6;
-    color: var(--muted);
+    color: #f87171;
 }
 
-.stats-footer {
-    margin-top: 18px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 12px;
-    flex-wrap: wrap;
-}
-
-.stats-footer a {
-    color: #f84982;
-    font-size: 12px;
-    font-weight: 600;
-    text-decoration: none;
-}
-
-.stats-footer a:hover {
-    text-decoration: underline;
-}
-
-.refresh-btn {
-    background: #1b2430;
-    color: white;
-    border: 1px solid #334155;
-    padding: 9px 13px;
-    border-radius: 9px;
-    cursor: pointer;
-    font-family: inherit;
-    font-size: 12px;
-    transition: .2s;
-}
-
-.refresh-btn:hover {
-    background: #263548;
-}
-
-.refresh-btn:disabled {
-    opacity: .5;
-    cursor: wait;
+.stats-error:empty {
+    display: none;
 }
 
 /* Discord Notification */
@@ -537,6 +530,15 @@ h1 {
     .steam-modal {
         padding: 20px;
     }
+
+    .refresh-btn {
+        font-size: 11px;
+        padding: 8px 10px;
+    }
+
+    .stats-status {
+        font-size: 10px;
+    }
 }
 </style>
 </head>
@@ -557,8 +559,6 @@ h1 {
 
     <div class="links">
 
-        <!-- Twitter -->
-
         <a
             class="link"
             href="https://x.com/kwersi"
@@ -568,8 +568,6 @@ h1 {
             <div class="link-title">twitter</div>
         </a>
 
-        <!-- Steam Popup Trigger -->
-
         <button
             class="link"
             type="button"
@@ -577,8 +575,6 @@ h1 {
             <img src="icons/steam.svg" alt="Steam" class="icon">
             <div class="link-title">steam</div>
         </button>
-
-        <!-- Faceit -->
 
         <a
             class="link"
@@ -589,17 +585,13 @@ h1 {
             <div class="link-title">faceit</div>
         </a>
 
-        <!-- Discord -->
-
-        <div
+        <button
             class="link"
-            role="button"
-            tabindex="0"
-            onclick="copyDiscord()"
-            onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();copyDiscord();}">
+            type="button"
+            onclick="copyDiscord()">
             <img src="icons/discord.svg" alt="Discord" class="icon">
             <div class="link-title">discord • @kwersi</div>
-        </div>
+        </button>
 
     </div>
 
@@ -609,27 +601,42 @@ h1 {
 
         <div class="stats-header">
 
-            <!-- Clickable Leetify Heading -->
+            <!-- Clickable Heading -->
 
             <h2>
                 <a
                     class="leetify-heading"
                     href="https://leetify.com/app/profile/76561198354031646"
                     target="_blank"
-                    rel="noopener noreferrer"
-                    title="View my Leetify profile">
-
-                    
-                    <span>leetify</span>
-
+                    rel="noopener noreferrer">
+                    View on Leetify
                 </a>
             </h2>
 
-            <span class="stats-status" id="statsStatus">
-                Loading...
-            </span>
+            <!-- Refresh Button and Timer -->
+
+            <div class="stats-controls">
+
+                <button
+                    class="refresh-btn"
+                    id="refreshStats"
+                    type="button"
+                    onclick="loadLeetifyStats()">
+                    ↻ Refresh Stats
+                </button>
+
+                <span
+                    class="stats-status"
+                    id="statsStatus"
+                    role="status">
+                    Loading...
+                </span>
+
+            </div>
 
         </div>
+
+        <!-- Stats Grid -->
 
         <div class="stats-grid">
 
@@ -682,27 +689,9 @@ h1 {
 
         </div>
 
-        <p class="stats-message" id="statsMessage" role="status">
-            Fetching live statistics from Leetify...
-        </p>
+        <!-- Only visible if API fails -->
 
-        <div class="stats-footer">
-
-            <a
-                href="https://leetify.com/app/profile/76561198354031646"
-                target="_blank"
-                rel="noopener noreferrer">
-                View on Leetify
-            </a>
-
-            <button
-                class="refresh-btn"
-                id="refreshStats"
-                onclick="loadLeetifyStats()">
-                ↻ Refresh Stats
-            </button>
-
-        </div>
+        <p class="stats-error" id="statsError" role="alert"></p>
 
     </section>
 
@@ -741,7 +730,7 @@ h1 {
 
         <div class="steam-accounts">
 
-            <!-- Main Steam Account -->
+            <!-- Main -->
 
             <a
                 class="steam-account"
@@ -759,7 +748,7 @@ h1 {
 
             </a>
 
-            <!-- Alt Steam Account -->
+            <!-- Alt -->
 
             <a
                 class="steam-account alt"
@@ -814,7 +803,6 @@ function openSteamPopup() {
     steamPreviousFocus = document.activeElement;
     overlay.classList.add("show");
     overlay.setAttribute("aria-hidden", "false");
-
     document.body.style.overflow = "hidden";
 
     overlay.querySelector(".steam-close").focus();
@@ -829,7 +817,6 @@ function closeSteamPopup(event) {
 
     overlay.classList.remove("show");
     overlay.setAttribute("aria-hidden", "true");
-
     document.body.style.overflow = "";
 
     if (steamPreviousFocus) {
@@ -895,6 +882,46 @@ const LEETIFY_API =
     "?steam64_id=" + STEAM_ID;
 
 let statsLoading = false;
+let lastUpdated = null;
+
+/* Update Timer */
+
+function updateStatsTimer() {
+    const status = document.getElementById("statsStatus");
+
+    if (lastUpdated === null) return;
+
+    const elapsed = Math.max(
+        0,
+        Math.floor((Date.now() - lastUpdated) / 1000)
+    );
+
+    if (elapsed < 60) {
+        status.textContent =
+            "Updated " + elapsed +
+            (elapsed === 1 ? " second ago" : " seconds ago");
+    } else if (elapsed < 3600) {
+        const minutes = Math.floor(elapsed / 60);
+
+        status.textContent =
+            "Updated " + minutes +
+            (minutes === 1 ? " minute ago" : " minutes ago");
+    } else if (elapsed < 86400) {
+        const hours = Math.floor(elapsed / 3600);
+
+        status.textContent =
+            "Updated " + hours +
+            (hours === 1 ? " hour ago" : " hours ago");
+    } else {
+        const days = Math.floor(elapsed / 86400);
+
+        status.textContent =
+            "Updated " + days +
+            (days === 1 ? " day ago" : " days ago");
+    }
+}
+
+/* Numeric Helpers */
 
 function setStat(id, value) {
     document.getElementById(id).textContent =
@@ -916,9 +943,7 @@ function firstNumber(...values) {
     for (const value of values) {
         const number = numberOrNull(value);
 
-        if (number !== null) {
-            return number;
-        }
+        if (number !== null) return number;
     }
 
     return null;
@@ -948,25 +973,12 @@ async function loadLeetifyStats() {
     statsLoading = true;
 
     const status = document.getElementById("statsStatus");
-    const message = document.getElementById("statsMessage");
+    const errorMessage = document.getElementById("statsError");
     const button = document.getElementById("refreshStats");
 
     button.disabled = true;
-    status.textContent = "Loading...";
-    message.textContent =
-        "Fetching live statistics from Leetify...";
-
-    const fields = [
-        "leetifyRating",
-        "premierRating",
-        "aimRating",
-        "positioningRating",
-        "utilityRating",
-        "winRate",
-        "totalMatches"
-    ];
-
-    fields.forEach(id => setStat(id, null));
+    status.textContent = "Refreshing...";
+    errorMessage.textContent = "";
 
     try {
         const response = await fetch(LEETIFY_API, {
@@ -1057,24 +1069,25 @@ async function loadLeetifyStats() {
         ].some(value => numberOrNull(value) !== null);
 
         if (!available) {
-            status.textContent = "No data";
-            message.textContent =
-                "Leetify returned a profile, but no supported statistics were available.";
-        } else {
-            status.textContent = "Updated";
-            message.textContent =
-                "Live data from Leetify. Refresh to check for newer stats.";
+            throw new Error("No supported statistics found");
         }
+
+        /* Reset timer only after successful refresh */
+
+        lastUpdated = Date.now();
+        updateStatsTimer();
 
     } catch (error) {
         console.error("Leetify API error:", error);
 
-        status.textContent = "Unavailable";
+        errorMessage.textContent =
+            "Unable to refresh Leetify statistics. Please try again later.";
 
-        message.textContent =
-            "Unable to load Leetify stats. The API may be " +
-            "rate-limited, the profile may be unavailable, " +
-            "or your browser may be blocking the request (CORS).";
+        if (lastUpdated === null) {
+            status.textContent = "Unavailable";
+        } else {
+            updateStatsTimer();
+        }
 
     } finally {
         statsLoading = false;
@@ -1082,7 +1095,15 @@ async function loadLeetifyStats() {
     }
 }
 
-/* Load Stats Automatically */
+/* Update timer every second */
+
+setInterval(() => {
+    if (!statsLoading) {
+        updateStatsTimer();
+    }
+}, 1000);
+
+/* Load stats automatically */
 
 loadLeetifyStats();
 
