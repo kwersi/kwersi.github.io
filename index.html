@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,104 +10,40 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
 <style>
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-
-/* Music player button */
-.music-button {
-    position: fixed;
-    bottom: 20px;
-    left: 20px;
-    padding: 12px 20px;
-    background: #3b82f6;
-    color: white;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    z-index: 1001;
+:root {
+    --bg: #0b0f14;
+    --card: #121821;
+    --card-hover: #18212d;
+    --border: #253142;
+    --text: #ffffff;
+    --muted: #93a2b7;
 }
 
-/* Music popup */
-.music-popup {
-    display: none;
-    position: fixed;
-    bottom: 75px;
-    left: 20px;
-    width: 300px;
-    padding: 20px;
-    background: #1f2937;
-    border: 1px solid #374151;
-    border-radius: 12px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-    z-index: 1002;
-}
-
-.music-popup.active {
-    display: block;
-}
-
-.music-header {
+body {
+    font-family: 'Inter', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
-    margin-bottom: 15px;
-}
-
-.music-header h3 {
-    font-size: 16px;
-    color: white;
-}
-
-.music-close {
-    background: none;
-    border: none;
-    color: #9ca3af;
-    font-size: 22px;
-    cursor: pointer;
-}
-
-.music-popup p {
-    color: #9ca3af;
-    font-size: 13px;
-    margin-bottom: 15px;
-}
-
-.music-popup audio {
-    width: 100%;
-}
-:root{
-    --bg:#0b0f14;
-    --card:#121821;
-    --card-hover:#18212d;
-    --border:#253142;
-    --text:#ffffff;
-    --muted:#93a2b7;
-}
-
-body{
-    font-family:'Inter',sans-serif;
-    background:var(--bg);
-    color:var(--text);
-    min-height:100vh;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    padding:24px;
-    position:relative;
-    overflow-x:hidden;
+    padding: 24px;
+    position: relative;
+    overflow-x: hidden;
 }
 
 /* Animated Background Glow */
 
-body::before{
-    content:"";
-    position:fixed;
-    inset:0;
-
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
     background:
         radial-gradient(
             circle at top center,
@@ -123,171 +60,277 @@ body::before{
             rgba(59,130,246,.08),
             transparent 30%
         );
-
-    pointer-events:none;
-    z-index:-1;
-
-    animation:glow 12s ease-in-out infinite alternate;
+    pointer-events: none;
+    z-index: -1;
+    animation: glow 12s ease-in-out infinite alternate;
 }
 
-@keyframes glow{
-    from{
-        transform:scale(1);
-    }
-    to{
-        transform:scale(1.1);
-    }
+@keyframes glow {
+    from { transform: scale(1); }
+    to { transform: scale(1.1); }
 }
 
-.container{
-    width:100%;
-    max-width:560px;
+/* Profile */
+
+.container {
+    width: 100%;
+    max-width: 560px;
 }
 
-.profile{
-    text-align:center;
-    margin-bottom:40px;
+.profile {
+    text-align: center;
+    margin-bottom: 40px;
 }
 
-.avatar{
-    width:160px;
-    height:160px;
-    margin:0 auto;
-    border-radius:50%;
-    object-fit:cover;
-
-    border:3px solid var(--border);
-
+.avatar {
+    width: 160px;
+    height: 160px;
+    margin: 0 auto;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid var(--border);
     box-shadow:
         0 0 40px rgba(88,101,242,.20),
         0 0 100px rgba(124,58,237,.10);
 }
 
-h1{
-    margin-top:24px;
-    font-size:2.2rem;
-    font-weight:800;
+h1 {
+    margin-top: 24px;
+    font-size: 2.2rem;
+    font-weight: 800;
 }
 
-.username{
-    margin-top:10px;
-    color:var(--muted);
+.username {
+    margin-top: 10px;
+    color: var(--muted);
 }
 
-.links{
-    display:flex;
-    flex-direction:column;
-    gap:14px;
+/* Social Links */
+
+.links {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
 }
 
-.link{
-    background:var(--card);
-    border:1px solid var(--border);
-    border-radius:18px;
-
-    padding:18px 22px;
-
-    display:flex;
-    align-items:center;
-    gap:16px;
-
-    color:white;
-    text-decoration:none;
-
-    transition:.2s ease;
+.link {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    padding: 18px 22px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    color: white;
+    text-decoration: none;
+    transition: .2s ease;
 }
 
-.link:hover{
-    transform:translateY(-3px);
-    background:var(--card-hover);
-    border-color:#3d5068;
+.link:hover {
+    transform: translateY(-3px);
+    background: var(--card-hover);
+    border-color: #3d5068;
 }
 
-.icon{
-    width:28px;
-    height:28px;
-    object-fit:contain;
-    flex-shrink:0;
+.icon {
+    width: 28px;
+    height: 28px;
+    object-fit: contain;
+    flex-shrink: 0;
 }
 
-.link-title{
-    font-size:1rem;
-    font-weight:600;
+.link-title {
+    font-size: 1rem;
+    font-weight: 600;
 }
 
-.discord-card{
-    cursor:pointer;
+.discord-card {
+    cursor: pointer;
 }
 
-.toast{
-    position:fixed;
-    left:50%;
-    bottom:24px;
-    transform:translateX(-50%);
+/* Discord Toast */
 
-    background:#1b2430;
-    border:1px solid #334155;
-
-    color:white;
-
-    padding:12px 18px;
-    border-radius:12px;
-
-    opacity:0;
-    pointer-events:none;
-    transition:.25s;
+.toast {
+    position: fixed;
+    left: 50%;
+    bottom: 90px;
+    transform: translateX(-50%);
+    background: #1b2430;
+    border: 1px solid #334155;
+    color: white;
+    padding: 12px 18px;
+    border-radius: 12px;
+    opacity: 0;
+    pointer-events: none;
+    transition: .25s;
+    z-index: 2000;
 }
 
-.toast.show{
-    opacity:1;
+.toast.show {
+    opacity: 1;
 }
 
-.settings-btn{
-    position:fixed;
-    right:24px;
-    bottom:24px;
+/* Settings Download Button */
 
-    width:60px;
-    height:60px;
-
-    display:flex;
-    align-items:center;
-    justify-content:center;
-
-    background:#121821;
-    border:1px solid #253142;
-    border-radius:50%;
-
-    transition:.2s ease;
-    z-index:1000;
-
-    box-shadow:
-        0 0 20px rgba(88,101,242,.12);
+.settings-btn {
+    position: fixed;
+    right: 24px;
+    bottom: 24px;
+    width: 60px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #121821;
+    border: 1px solid #253142;
+    border-radius: 50%;
+    transition: .2s ease;
+    z-index: 1000;
+    box-shadow: 0 0 20px rgba(88,101,242,.12);
 }
 
-.settings-btn:hover{
-    transform:rotate(25deg);
-    background:#18212d;
-    border-color:#5865f2;
+.settings-btn:hover {
+    transform: rotate(25deg);
+    background: #18212d;
+    border-color: #5865f2;
 }
 
-.settings-btn img{
-    width:24px;
-    height:24px;
-    object-fit:contain;
+.settings-btn img {
+    width: 24px;
+    height: 24px;
+    object-fit: contain;
 }
 
-@media (max-width:600px){
+/* Music Player Button */
 
-    .avatar{
-        width:130px;
-        height:130px;
+.music-button {
+    position: fixed;
+    bottom: 24px;
+    left: 24px;
+    padding: 14px 22px;
+    background: #121821;
+    border: 1px solid #253142;
+    border-radius: 14px;
+    color: white;
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    z-index: 1001;
+    transition: .2s ease;
+    box-shadow: 0 0 20px rgba(88,101,242,.12);
+}
+
+.music-button:hover {
+    background: #18212d;
+    border-color: #5865f2;
+    transform: translateY(-3px);
+}
+
+/* YouTube Video Popup */
+
+.music-popup {
+    display: none;
+    position: fixed;
+    bottom: 90px;
+    left: 24px;
+    width: min(420px, calc(100vw - 48px));
+    padding: 18px;
+    background: #121821;
+    border: 1px solid #253142;
+    border-radius: 18px;
+    box-shadow: 0 15px 50px rgba(0,0,0,.6);
+    z-index: 1002;
+    animation: popupAppear .2s ease;
+}
+
+.music-popup.active {
+    display: block;
+}
+
+@keyframes popupAppear {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.music-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 14px;
+}
+
+.music-header h3 {
+    font-size: 15px;
+    font-weight: 700;
+}
+
+.music-close {
+    background: transparent;
+    border: none;
+    color: #93a2b7;
+    font-size: 24px;
+    cursor: pointer;
+    transition: .2s;
+}
+
+.music-close:hover {
+    color: white;
+}
+
+.music-popup p {
+    color: var(--muted);
+    font-size: 13px;
+    margin-bottom: 14px;
+}
+
+.video-container {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    border-radius: 10px;
+    overflow: hidden;
+    background: #000;
+}
+
+.video-container iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+/* Mobile */
+
+@media (max-width: 600px) {
+    .avatar {
+        width: 130px;
+        height: 130px;
     }
 
-    h1{
-        font-size:1.8rem;
+    h1 {
+        font-size: 1.8rem;
     }
 
+    .music-button {
+        left: 15px;
+        bottom: 20px;
+    }
+
+    .music-popup {
+        left: 15px;
+        bottom: 80px;
+        width: calc(100vw - 30px);
+    }
+
+    .settings-btn {
+        right: 15px;
+        bottom: 20px;
+    }
 }
 </style>
 </head>
@@ -297,7 +340,6 @@ h1{
 <div class="container">
 
     <div class="profile">
-
         <img
             src="dust.gif"
             alt="kwersi"
@@ -308,11 +350,11 @@ h1{
         <div class="username">
             @kwersi
         </div>
-
     </div>
 
     <div class="links">
 
+        <!-- Twitter -->
         <a
             class="link"
             href="https://x.com/kwersi"
@@ -324,12 +366,10 @@ h1{
                 alt="X"
                 class="icon">
 
-            <div class="link-title">
-                twitter
-            </div>
-
+            <div class="link-title">twitter</div>
         </a>
 
+        <!-- Steam -->
         <a
             class="link"
             href="https://steamcommunity.com/profiles/76561198354031646"
@@ -341,12 +381,10 @@ h1{
                 alt="Steam"
                 class="icon">
 
-            <div class="link-title">
-                steam
-            </div>
-
+            <div class="link-title">steam</div>
         </a>
 
+        <!-- Faceit -->
         <a
             class="link"
             href="https://www.faceit.com/en/players/kwersi"
@@ -358,12 +396,10 @@ h1{
                 alt="Faceit"
                 class="icon">
 
-            <div class="link-title">
-                faceit
-            </div>
-
+            <div class="link-title">faceit</div>
         </a>
 
+        <!-- Discord -->
         <div
             class="link discord-card"
             onclick="copyDiscord()">
@@ -376,12 +412,12 @@ h1{
             <div class="link-title">
                 discord • @kwersi
             </div>
-
         </div>
 
     </div>
-
 </div>
+
+<!-- CS2 Settings Download -->
 
 <a
     href="settings/730.zip"
@@ -392,55 +428,107 @@ h1{
     <img
         src="icons/cog.svg"
         alt="Settings">
-
 </a>
 
-<div id="toast" class="toast">
+<!-- Discord Toast -->
+
+<div id="toast" class="toast" role="status">
     Copied Discord username: @kwersi
 </div>
 
-<script>
-function copyDiscord() {
-    navigator.clipboard.writeText("@kwersi");
+<!-- Music Player Button -->
 
-    const toast = document.getElementById("toast");
-
-    toast.classList.add("show");
-
-    setTimeout(() => {
-        toast.classList.remove("show");
-    }, 2000);
-}
-
-    function toggleMusic() {
-    const popup = document.getElementById("musicPopup");
-
-    popup.classList.toggle("active");
-}
-    </script>
-    
-    
- <!-- Music player button -->
-<button class="music-button" onclick="toggleMusic()">
+<button
+    class="music-button"
+    onclick="toggleMusic()">
     ♫ Music Player
 </button>
 
-<!-- Music popup -->
+<!-- YouTube Popup -->
+
 <div class="music-popup" id="musicPopup">
 
     <div class="music-header">
         <h3>♫ Now Playing</h3>
-        <button class="music-close" onclick="toggleMusic()">×</button>
+
+        <button
+            class="music-close"
+            onclick="toggleMusic()"
+            aria-label="Close music player">
+            ×
+        </button>
     </div>
 
     <p>Paradisio</p>
 
-    <audio id="musicPlayer" controls>
-        <source src="./paradisio.mp4" type="audio/mp4">
-        Your browser does not support audio playback.
-    </audio>
+    <div class="video-container">
+        <iframe
+            id="youtubePlayer"
+            title="Paradisio Video"
+            src=""
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            referrerpolicy="strict-origin-when-cross-origin"
+            allowfullscreen>
+        </iframe>
+    </div>
 
 </div>
-    
+
+<script>
+
+/* Discord Copy */
+
+let toastTimeout;
+
+function copyDiscord() {
+    navigator.clipboard.writeText("@kwersi")
+        .then(() => {
+            const toast = document.getElementById("toast");
+
+            toast.classList.add("show");
+
+            clearTimeout(toastTimeout);
+
+            toastTimeout = setTimeout(() => {
+                toast.classList.remove("show");
+            }, 2000);
+        })
+        .catch(() => {
+            alert("Discord username: @kwersi");
+        });
+}
+
+/* YouTube Music Player */
+
+/*
+    REPLACE YOUR_VIDEO_ID
+    with the ID from your YouTube link.
+
+    Example:
+    https://www.youtube.com/watch?v=dQw4w9WgXcQ
+
+    Video ID: dQw4w9WgXcQ
+*/
+
+const youtubeVideoId = "7B44gyvBsTA";
+
+function toggleMusic() {
+    const popup = document.getElementById("musicPopup");
+    const player = document.getElementById("youtubePlayer");
+
+    const isOpen = popup.classList.toggle("active");
+
+    if (isOpen) {
+        player.src =
+            "https://www.youtube.com/embed/" +
+            youtubeVideoId;
+    } else {
+        // Stop the video when closing the popup
+        player.src = "";
+    }
+}
+
+</script>
+
 </body>
 </html>
