@@ -187,7 +187,6 @@ const columns = [
     ["location", "Location"],
     ["assetnum", "Asset"],
     ["wopriority", "PR"],
-    ["worktype", "WT"],
     ["persongroup", "Person Group"],
     ["reportdate", "Report Date"],
     ["description2", "Description"]
@@ -252,7 +251,6 @@ function normalize(workOrder) {
         location: workOrder.location ?? "",
         assetnum: workOrder.assetnum ?? "",
         wopriority: workOrder.wopriority ?? "",
-        worktype: workOrder.worktype ?? "",
         persongroup: workOrder.persongroup ?? "",
         reportdate: dateText(workOrder.reportdate),
         description2: description
@@ -502,7 +500,6 @@ $("demo").onclick = () => {
             location: "EXEMPEL",
             assetnum: "DEMO",
             wopriority: 9,
-            worktype: "CM",
             description: "Exempel på arbetsorder",
             asset_description: "Exempelutrustning"
         },
@@ -511,7 +508,6 @@ $("demo").onclick = () => {
             wonum: "DEMO-002",
             location: "EXEMPEL",
             wopriority: 8,
-            worktype: "CM",
             description: "Exempel på planerat arbete"
         },
 
@@ -519,7 +515,6 @@ $("demo").onclick = () => {
             wonum: "DEMO-003",
             location: "EXEMPEL",
             wopriority: 7,
-            worktype: "PM",
             description: "Exempel på förebyggande arbete"
         }
 
