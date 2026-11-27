@@ -90,10 +90,6 @@ td.pr {
     text-align: center;
 }
 
-td.alert {
-    color: #f2495c;
-}
-
 #message {
     color: #a7adb7;
 }
@@ -187,16 +183,12 @@ const $ = id => document.getElementById(id);
 /* Table columns */
 
 const columns = [
-    ["alerting", "Alert"],
     ["wonum", "Work Order"],
     ["location", "Location"],
     ["assetnum", "Asset"],
-    ["status", "Status"],
     ["wopriority", "PR"],
     ["worktype", "WT"],
     ["persongroup", "Person Group"],
-    ["supervisor", "Supervisor"],
-    ["lead", "Lead"],
     ["reportdate", "Report Date"],
     ["description2", "Description"]
 ];
@@ -242,18 +234,6 @@ function dateText(value) {
 
 function normalize(workOrder) {
 
-    const start =
-        workOrder.schedstart ||
-        workOrder.targstartdate;
-
-    const alerting =
-        workOrder.status !== "COMP" &&
-        !workOrder.actstart &&
-        start &&
-        new Date(start) < new Date()
-            ? 1
-            : 0;
-
     const description =
         workOrder.description2 ??
         (
@@ -268,10 +248,14 @@ function normalize(workOrder) {
         );
 
     return {
-        ...workOrder,
-        alerting: alerting,
-        description2: description,
-        reportdate: dateText(workOrder.reportdate)
+        wonum: workOrder.wonum ?? "",
+        location: workOrder.location ?? "",
+        assetnum: workOrder.assetnum ?? "",
+        wopriority: workOrder.wopriority ?? "",
+        worktype: workOrder.worktype ?? "",
+        persongroup: workOrder.persongroup ?? "",
+        reportdate: dateText(workOrder.reportdate),
+        description2: description
     };
 }
 
@@ -410,15 +394,7 @@ function render() {
                 document.createElement("td");
 
             td.textContent =
-                key === "alerting"
-                    ? row[key] ? "●" : ""
-                    : String(row[key] ?? "");
-
-            /* Alert indicator */
-
-            if (key === "alerting") {
-                td.className = "alert";
-            }
+                String(row[key] ?? "");
 
             /* Priority colors */
 
@@ -525,18 +501,15 @@ $("demo").onclick = () => {
             wonum: "DEMO-001",
             location: "EXEMPEL",
             assetnum: "DEMO",
-            status: "APPR",
             wopriority: 9,
             worktype: "CM",
             description: "Exempel på arbetsorder",
-            asset_description: "Exempelutrustning",
-            schedstart: "2020-01-01"
+            asset_description: "Exempelutrustning"
         },
 
         {
             wonum: "DEMO-002",
             location: "EXEMPEL",
-            status: "APPR",
             wopriority: 8,
             worktype: "CM",
             description: "Exempel på planerat arbete"
@@ -545,10 +518,9 @@ $("demo").onclick = () => {
         {
             wonum: "DEMO-003",
             location: "EXEMPEL",
-            status: "COMP",
             wopriority: 7,
             worktype: "PM",
-            description: "Exempel på avslutat arbete"
+            description: "Exempel på förebyggande arbete"
         }
 
     ], "EXEMPELDATA – inte verkliga arbetsordrar.");
